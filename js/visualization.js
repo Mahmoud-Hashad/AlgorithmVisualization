@@ -1,7 +1,3 @@
-let canvas = document.getElementById("canvas");
-let ctx = canvas.getContext("2d");
-
-resizeCanvas();
 
 class Visualization {
   constructor(ctx, size, speed) {
