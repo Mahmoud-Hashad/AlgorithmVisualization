@@ -1,5 +1,6 @@
+
 class Visualization {
-  constructor(canvasId, size, speed) {
+  constructor(canvasId, size, time) {
     this.canvas = document.getElementById(canvasId);
     this.ctx = this.canvas.getContext("2d");
 
@@ -7,13 +8,12 @@ class Visualization {
     this.canvasHeight = this.canvas.height;
     this.columnWidth = Math.round(this.canvasWidth / this.size);
 
-    this.speed = speed;
+    this.time = time;
     this.margin = 1;
     this.colors = {
       ideal: "rgba(51, 0, 255, .6)",
+        swaped: "rgba(255, 0, 51, .6)"
     };
-
-    this.oldIX = 0;
 
     this.array = [];
     this.resize(size);
@@ -40,45 +40,55 @@ class Visualization {
     this.size = s;
     this.columnWidth = this.canvasWidth / this.size;
     this.randomize();
+    this.draw(); // mosa: add this to restart canvas after changing the size
   }
 
-  setSpeed(s) {
-    this.speed = s;
+  setTime(s) {
+    this.time = s;
   }
 
-  swap(i, j) {
-    // color the two indeces
-    this.array[i].color = "red";
-    this.array[j].color = "red";
-
-    // animate the swap
-    this.oldIX = this.array[i].x;
-    let dest = this.array[i].x - this.myArray[j].x;
-    this.swapAnimation(i, j);
-
-    // swap them
-    let temp = this.array[i];
-    this.array[i] = this.aArray[j];
-    this.aArray[j] = temp;
-
-    // restore color
-    this.array[i].color = "blue";
-    this.array[j].color = "blue";
-  }
-
-  swapAnimation(i, j, dest) {
-    this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-
-    if (this.array[j].x == this.oldIX) {
-      this.draw();
-      return;
+swap(i, j) {
+    // check that i is the left col
+    if (i > j) {
+        let t = i;
+        i = j;
+        j = t;
     }
+    
+    // save the starting point and distance
+    let start = this.array[i].x;
+    let distance = this.array[j].x - this.array[i].x;
+    // color the swaped indeces
+    this.array[i].color = this.colors.swaped;
+    this.array[j].color = this.colors.swaped;
+    
+    // animate the swap
+    let x = setInterval(() => {
+        // if swap is finished
+        if (this.array[j].x <= start) {
+            // swap them in array
+            let temp = this.array[i];
+            this.array[i] = this.array[j];
+            this.array[j] = temp;
 
-    this.array[i].x += dest / this.time;
-    this.array[j].x -= dest / this.time;
+            // restore color
+            this.array[i].color = this.colors.ideal;
+            this.array[j].color = this.colors.ideal;
 
-    this.draw();
-    requestAnimationFrame(swapAnimation);
+            // end animation
+            this.draw();
+            clearInterval(x);
+            return;
+        }
+
+        // move each col 1 pixel at a time
+        this.array[i].x += 1;
+        this.array[j].x -= 1;
+
+        // draw the update
+        this.draw();
+        
+    }, this.time / distance * 1000)
   }
 
   compare(i, j) {
