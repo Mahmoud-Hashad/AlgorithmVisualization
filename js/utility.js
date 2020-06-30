@@ -17,3 +17,14 @@ function swap(arr, i, j) {
   arr[i] = arr[j];
   arr[j] = t;
 }
+
+// animate the sort
+async function animatedSort(sortFunc, board) {
+  instructions = sortFunc(board.toArray());
+
+  for (let i = 0; i < instructions.length; i++) {
+    if (instructions[i].type == operations.swap) {
+      await board.swap(instructions[i].left, instructions[i].right);
+    }
+  }
+}

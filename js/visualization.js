@@ -71,8 +71,8 @@ class Visualization {
     let start = this.array[i].x;
     let distance = this.array[j].x - this.array[i].x;
     // color the swapped indices
-    this.array[i].color = this.colors.swaped;
-    this.array[j].color = this.colors.swaped;
+    this.array[i].color = this.colors.swapped;
+    this.array[j].color = this.colors.swapped;
 
     // animate the swap
 
