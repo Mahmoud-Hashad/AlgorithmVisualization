@@ -34,6 +34,15 @@ class Visualization {
   at(index) {
     return this.array[index].value;
   }
+    
+    // a method to turn the object array into a numeric array
+    toArray() {
+        let array = [];
+        for (var i = 0; i < this.array.length; i++) {
+            array[i] = this.array[i].value;
+        }
+        return array;
+    }
 
   resize(s) {
     // change the size and start a new visual.
