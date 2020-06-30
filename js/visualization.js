@@ -1,19 +1,23 @@
 class Visualization {
   constructor(canvasId, size, time) {
+    // store canvas and its context
     this.canvas = document.getElementById(canvasId);
     this.ctx = this.canvas.getContext("2d");
 
+    // save canvas width and height and calc column width
     this.canvasWidth = this.canvas.width;
     this.canvasHeight = this.canvas.height;
     this.columnWidth = Math.round(this.canvasWidth / this.size);
 
-    this.time = time;
-    this.margin = 1;
+    this.time = time; // time for the animation
+    this.margin = 1; // space between the columns
+
+    // define global colors
     this.colors = {
       ideal: "rgba(51, 0, 255, .6)",
       swapped: "rgba(255, 0, 51, .6)",
     };
-
+    // create the array
     this.array = [];
     this.resize(size);
   }
@@ -66,7 +70,7 @@ class Visualization {
     // save the starting point and distance
     let start = this.array[i].x;
     let distance = this.array[j].x - this.array[i].x;
-    // color the swaped indeces
+    // color the swapped indices
     this.array[i].color = this.colors.swaped;
     this.array[j].color = this.colors.swaped;
 
