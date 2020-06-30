@@ -8,8 +8,8 @@ function bubbleSort(inputArray) {
       // add comparison operation to output log
       outputLog.push({
         type: operations.compare,
-        left: i,
-        right: j,
+        left: j,
+        right: j + 1,
       });
 
       // compare two elements and check if the first one is greater
