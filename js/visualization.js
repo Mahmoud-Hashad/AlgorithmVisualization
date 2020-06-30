@@ -119,15 +119,15 @@ class Visualization {
 
     for (let i = 0; i < this.size; i++) {
       // draw every column
-      this.ctx.beginPath();
-      this.ctx.rect(
+      roundRect(
+        this.ctx,
         this.margin + this.array[i].x,
         0,
         this.columnWidth - this.margin * 2,
-        -this.at(i)
+        -this.at(i),
+        3,
+        this.array[i].color
       );
-      this.ctx.fillStyle = this.array[i].color;
-      this.ctx.fill();
     }
 
     // remaps the (0,0) position to the top left
