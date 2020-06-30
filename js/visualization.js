@@ -1,4 +1,3 @@
-
 class Visualization {
   constructor(canvasId, size, time) {
     this.canvas = document.getElementById(canvasId);
@@ -12,7 +11,7 @@ class Visualization {
     this.margin = 1;
     this.colors = {
       ideal: "rgba(51, 0, 255, .6)",
-        swaped: "rgba(255, 0, 51, .6)"
+      swapped: "rgba(255, 0, 51, .6)",
     };
 
     this.array = [];
@@ -34,15 +33,15 @@ class Visualization {
   at(index) {
     return this.array[index].value;
   }
-    
-    // a method to turn the object array into a numeric array
-    toArray() {
-        let array = [];
-        for (var i = 0; i < this.array.length; i++) {
-            array[i] = this.array[i].value;
-        }
-        return array;
+
+  // a method to turn the object array into a numeric array
+  toArray() {
+    let array = [];
+    for (let i = 0; i < this.size; i++) {
+      array[i] = this.array[i].value;
     }
+    return array;
+  }
 
   resize(s) {
     // change the size and start a new visual.
@@ -56,48 +55,48 @@ class Visualization {
     this.time = s;
   }
 
-swap(i, j) {
+  async swap(i, j) {
     // check that i is the left col
     if (i > j) {
-        let t = i;
-        i = j;
-        j = t;
+      let t = i;
+      i = j;
+      j = t;
     }
-    
+
     // save the starting point and distance
     let start = this.array[i].x;
     let distance = this.array[j].x - this.array[i].x;
     // color the swaped indeces
     this.array[i].color = this.colors.swaped;
     this.array[j].color = this.colors.swaped;
-    
+
     // animate the swap
-    let x = setInterval(() => {
-        // if swap is finished
-        if (this.array[j].x <= start) {
-            // swap them in array
-            let temp = this.array[i];
-            this.array[i] = this.array[j];
-            this.array[j] = temp;
 
-            // restore color
-            this.array[i].color = this.colors.ideal;
-            this.array[j].color = this.colors.ideal;
+    // if swap is finished
+    while (true) {
+      if (this.array[j].x <= start) {
+        // swap them in array
+        let temp = this.array[i];
+        this.array[i] = this.array[j];
+        this.array[j] = temp;
 
-            // end animation
-            this.draw();
-            clearInterval(x);
-            return;
-        }
+        // restore color
+        this.array[i].color = this.colors.ideal;
+        this.array[j].color = this.colors.ideal;
 
-        // move each col 1 pixel at a time
-        this.array[i].x += 1;
-        this.array[j].x -= 1;
-
-        // draw the update
+        // end animation
         this.draw();
-        
-    }, this.time / distance * 1000)
+        return;
+      }
+
+      // move each col 1 pixel at a time
+      this.array[i].x += 1;
+      this.array[j].x -= 1;
+
+      // draw the update
+      this.draw();
+      await sleep((this.time / distance) * 1000);
+    }
   }
 
   compare(i, j) {
