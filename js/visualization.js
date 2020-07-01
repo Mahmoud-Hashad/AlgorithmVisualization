@@ -59,7 +59,7 @@ class Visualization {
     this.time = s;
   }
 
-  async swap(i, j) {
+  async swapAnimation(i, j) {
     // check that i is the left col
     if (i > j) {
       let t = i;
@@ -100,6 +100,20 @@ class Visualization {
       // draw the update
       this.draw();
       await sleep((this.time / distance) * 1000);
+    }
+  }
+
+  // animate the sort
+  async animate(sortFunc) {
+    this.instructions = sortFunc(this.toArray());
+
+    for (let i = 0; i < this.instructions.length; i++) {
+      if (this.instructions[i].type == operations.swap) {
+        await this.swapAnimation(
+          this.instructions[i].left,
+          this.instructions[i].right
+        );
+      }
     }
   }
 

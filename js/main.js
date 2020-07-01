@@ -1,4 +1,5 @@
 let board = new Visualization("mainCanvas", 40, 1);
-board.draw();
+board.animate(bubbleSort);
 
-animatedSort(bubbleSort, board);
+let board2 = new Visualization("mainCanvas2", 40, 1);
+board2.animate(bubbleSort);

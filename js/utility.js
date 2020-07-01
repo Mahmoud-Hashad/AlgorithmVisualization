@@ -1,5 +1,5 @@
 // sleep function
-// make execution of every thing for (ms) of time
+// stop execution of every thing for (ms) of time
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -18,23 +18,12 @@ function swap(arr, i, j) {
   arr[j] = t;
 }
 
-// animate the sort
-async function animatedSort(sortFunc, board) {
-  instructions = sortFunc(board.toArray());
-
-  for (let i = 0; i < instructions.length; i++) {
-    if (instructions[i].type == operations.swap) {
-      await board.swap(instructions[i].left, instructions[i].right);
-    }
-  }
-}
-
 // round rect
 // from: https://stackoverflow.com/questions/1255512/how-to-draw-a-rounded-rectangle-on-html-canvas
 // note: modify some signs of the height to work with the negative
 // change fill form bool to the color value
 function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
-  // validate the paramters
+  // validate the parameters
   if (typeof stroke === "undefined") {
     stroke = false;
   }
