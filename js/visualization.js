@@ -7,16 +7,24 @@ class Visualization {
     // save canvas width and height and calc column width
     this.canvasWidth = this.canvas.width;
     this.canvasHeight = this.canvas.height;
-    this.columnWidth = Math.round(this.canvasWidth / this.size);
+    this.columnWidth = Math.round(this.canvasWidth / size);
 
     this.time = time; // time for the animation
-    this.margin = 1; // space between the columns
+    this.margin = 3; // space between the columns
+    this.numArea = 20; // the total space to wite value of each column
+
+    // value of each column related to count of the columns
+    this.scale = 5;
+    // each 1 in colum value = height px
+    this.columHeightUnit =
+      (this.canvasHeight - this.columnWidth) / (size * this.scale);
 
     // define global colors
     this.colors = {
       ideal: "rgba(51, 0, 255, .6)",
       swapped: "rgba(255, 0, 51, .6)",
     };
+
     // create the array
     this.array = [];
     this.resize(size);
@@ -26,8 +34,8 @@ class Visualization {
     // start a new visualization with random numbers
     for (let i = 0; i < this.size; i++) {
       this.array[i] = {
-        // value between 4 and canvas height
-        value: 4 + Math.floor(Math.random() * (this.canvasHeight - 4)),
+        // random value [1, size * scale - 2]
+        value: Math.floor(1 + Math.random() * (this.size * this.scale - 2)),
         x: this.columnWidth * i,
         color: this.colors.ideal,
       };
@@ -133,13 +141,14 @@ class Visualization {
 
     for (let i = 0; i < this.size; i++) {
       // draw every column
-      roundRect(
+      drawColumn(
         this.ctx,
         this.margin + this.array[i].x,
-        0,
+        -this.numArea,
         this.columnWidth - this.margin * 2,
-        -this.at(i),
+        -this.at(i) * this.columHeightUnit,
         3,
+        this.at(i),
         this.array[i].color
       );
     }

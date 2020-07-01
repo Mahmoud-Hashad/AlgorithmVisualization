@@ -22,7 +22,7 @@ function swap(arr, i, j) {
 // from: https://stackoverflow.com/questions/1255512/how-to-draw-a-rounded-rectangle-on-html-canvas
 // note: modify some signs of the height to work with the negative
 // change fill form bool to the color value
-function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+function drawColumn(ctx, x, y, width, height, radius, value, fill, stroke) {
   // validate the parameters
   if (typeof stroke === "undefined") {
     stroke = false;
@@ -38,13 +38,15 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
       radius[side] = radius[side] || defaultRadius[side];
     }
   }
+  // fill with color if exist
+
   // start the shape of the rect
   ctx.beginPath();
   ctx.moveTo(x + radius.tl, y); // start a the x position
   // bottom side
   ctx.lineTo(x + width - radius.tr, y);
   //  right bottom corner
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+  ctx.quadraticCurveTo(x + width, y, x + width, y - radius.tr);
   // right side
   ctx.lineTo(x + width, y + height + radius.br);
   // top right corner
@@ -59,16 +61,18 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
   // top left corner
   ctx.quadraticCurveTo(x, y + height, x, y + height + radius.bl);
   // left size
-  ctx.lineTo(x, y + radius.tl);
+  ctx.lineTo(x, y - radius.tl);
   // bottom left corner
   ctx.quadraticCurveTo(x, y, x + radius.tl, y);
   ctx.closePath();
-
-  // fill with color if exist
   if (fill) {
     ctx.fillStyle = fill;
     ctx.fill();
   }
+  ctx.font = "14px Arial";
+  ctx.textAlign = "center";
+
+  ctx.fillText(value, width / 2 + x, y + 18);
 
   // draw stroke if exist
   if (stroke) {
