@@ -23,14 +23,23 @@ class Visualization {
     this.colors = {
       ideal: "rgba(51, 0, 255, .6)",
       swapped: "rgba(255, 0, 51, .6)",
+      compared: "rgba(204, 0, 204, .6)"
     };
 
     // create the array
     this.array = [];
     this.resize(size);
+      
+    this.running = false;
   }
 
-  randomize() {
+  async randomize() {
+    // stop any running funcion from continuing
+    if (this.running == true) {
+        this.running = false;
+        await sleep(this.time * 1100);
+    }
+    
     // start a new visualization with random numbers
     for (let i = 0; i < this.size; i++) {
       this.array[i] = {
@@ -40,6 +49,8 @@ class Visualization {
         color: this.colors.ideal,
       };
     }
+    
+    this.draw();
   }
 
   at(index) {
@@ -110,28 +121,58 @@ class Visualization {
       await sleep((this.time / distance) * 1000);
     }
   }
+    
+  // animate the compare
+  // this works as j supposed to be > i
+  async compareAnimation(i, j) {
+    // color the compared indices
+    this.array[i].color = this.colors.compared;
+    this.array[j].color = this.colors.compared;
+    
+    // draw the update
+    this.draw();
+    await sleep(this.time * 1000);
+    
+    // if the compare results doing nothing
+    if (this.at(i) < this.at(j)) {
+        this.array[i].color = this.colors.swapped;
+        this.array[j].color = this.colors.swapped;
+        
+        // draw the updates
+        this.draw();
+        await sleep(this.time * 1000);
+    }
+      
+    // restore everything
+    this.array[i].color = this.colors.ideal;
+    this.array[j].color = this.colors.ideal;
+    this.draw();
+  }
 
-  // animate the sort
+  // animate the log instructions
   async animate(sortFunc) {
+    // stop any other function to start this one
+    this.running = false;
+    await sleep(this.time * 1100);
+    this.running = true;
+      
     this.instructions = sortFunc(this.toArray());
 
-    for (let i = 0; i < this.instructions.length; i++) {
+    for (let i = 0; i < this.instructions.length && this.running; i++) {
       if (this.instructions[i].type == operations.swap) {
         await this.swapAnimation(
           this.instructions[i].left,
           this.instructions[i].right
         );
       }
+      else if (this.instructions[i].type == operations.compare) {
+          await this.compareAnimation(
+          this.instructions[i].left,
+          this.instructions[i].right
+          );
+      }
     }
   }
-
-  compare(i, j) {
-    if (this.at(i) > this.at(j)) return 1;
-    if (this.at(i) < this.at(j)) return -1;
-    return 0;
-  }
-
-  select(i) {}
 
   draw() {
     // clear canvas content

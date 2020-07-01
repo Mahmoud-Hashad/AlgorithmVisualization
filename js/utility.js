@@ -8,6 +8,7 @@ function sleep(ms) {
 const operations = {
   swap: "swap",
   compare: "compare",
+  slect: "select",
 };
 
 // function swap
