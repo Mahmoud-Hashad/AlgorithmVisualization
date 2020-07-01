@@ -10,11 +10,12 @@ class Visualization {
     this.columnWidth = Math.round(this.canvasWidth / size);
 
     this.time = time; // time for the animation
-    this.margin = 3; // space between the columns
+    this.margin = 5; // space between the columns
     this.numArea = 20; // the total space to wite value of each column
 
     // value of each column related to count of the columns
-    this.scale = 5;
+    this.scale = 3;
+
     // each 1 in colum value = height px
     this.columHeightUnit =
       (this.canvasHeight - this.columnWidth) / (size * this.scale);
@@ -145,7 +146,7 @@ class Visualization {
         this.ctx,
         this.margin + this.array[i].x,
         -this.numArea,
-        this.columnWidth - this.margin * 2,
+        this.columnWidth - this.margin,
         -this.at(i) * this.columHeightUnit,
         3,
         this.at(i),
