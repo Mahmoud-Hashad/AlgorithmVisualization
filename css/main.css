@@ -1,3 +1,4 @@
+/*global styles and classes*/
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,6 +13,11 @@ body {
   font-family: arial;
 }
 
+.container,
+.animationControl {
+  margin: 15px;
+}
+/* header styles */
 nav {
   width: 100%;
   padding: 24px;
@@ -26,10 +32,7 @@ nav h1 {
   letter-spacing: 1.1px;
 }
 
-.container,
-.animationControl {
-  margin: 15px;
-}
+/*button styles*/
 button {
   background-color: #3333aa;
   border: none;
@@ -47,6 +50,11 @@ button:hover {
   background-color: #0000aa;
 }
 
+/* Animation time controls Styles*/
+.animationControl label {
+  font-size: 20px;
+  color: rgba(51, 0, 255, 0.8);
+}
 #animationTime {
   appearance: none;
   -webkit-appearance: none;
@@ -79,4 +87,18 @@ button:hover {
   margin-left: 10px;
   color: rgba(51, 0, 255, 0.6);
   border: 2px solid rgba(51, 0, 255, 0.6);
+}
+
+/* Footer styles */
+footer {
+  padding-top: 35px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+footer p {
+  font-size: 18px;
+  color: rgba(51, 0, 255, 0.8);
+}
+footer a {
+  color: rgba(51, 0, 255, 0.8);
 }

@@ -13,13 +13,17 @@
     </nav>
     <!--Algorithm controls -->
     <div class="container controls">
+      <!--buttons like randomize the values and change the visualized algorithm-->
       <div class="buttons">
         <button onclick="board.randomize()">Randomize</button>
         <button onclick="board.animate(insertionSort)">Insertion Sort</button>
         <button onclick="board.animate(bubbleSort)">Bubble Sort</button>
         <button onclick="board.animate(selectionSort)">Selection Sort</button>
       </div>
+      <!--controls to change the animation -->
       <div class="animationControl">
+        <!--change the time of the animation-->
+        <label>Animation Time:</label>
         <input
           type="range"
           min=".1"
@@ -35,6 +39,15 @@
     <div class="container center">
       <canvas id="mainCanvas" width="600px" height="400px"></canvas>
     </div>
+
+    <!--The Footer-->
+    <footer>
+      <p>
+        Created By
+        <a href="https://github.com/Mahmoud-Hashad">Mahmoud Ramadan</a> &
+        <a href="https://github.com/abdomosa1999">Abdo Mosa</a>
+      </p>
+    </footer>
     <script src="js/utility.js"></script>
     <script src="js/visualization.js"></script>
     <script src="js/algorithms.js"></script>
