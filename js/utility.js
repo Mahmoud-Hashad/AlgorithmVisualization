@@ -19,6 +19,18 @@ function swap(arr, i, j) {
   arr[j] = t;
 }
 
+// function to change animation time
+function changeAnimTime(board) {
+  // select the range element and get its value
+  rangeValue = document.getElementById("animationTime").value;
+
+  // change board animation time
+  board.setTime(rangeValue);
+
+  // timeValue element to match the new value of time
+  document.getElementById("timeValue").innerText = rangeValue;
+}
+
 // round rect
 // from: https://stackoverflow.com/questions/1255512/how-to-draw-a-rounded-rectangle-on-html-canvas
 // note: modify some signs of the height to work with the negative

@@ -11,14 +11,30 @@
     <nav>
       <h1>Algorithm Visualization</h1>
     </nav>
-
-    <button onclick="board.randomize()">Randomize</button>
-    <button onclick="board.animate(insertionSort)">Insertion Sort</button>
-    <button onclick="board.animate(bubbleSort)">Bubble Sort</button>
-    <button onclick="board.animate(selectionSort)">Selection Sort</button>
-
-    <canvas id="mainCanvas" width="600px" height="400px"></canvas>
-
+    <!--Algorithm controls -->
+    <div class="container controls">
+      <div class="buttons">
+        <button onclick="board.randomize()">Randomize</button>
+        <button onclick="board.animate(insertionSort)">Insertion Sort</button>
+        <button onclick="board.animate(bubbleSort)">Bubble Sort</button>
+        <button onclick="board.animate(selectionSort)">Selection Sort</button>
+      </div>
+      <div class="animationControl">
+        <input
+          type="range"
+          min=".1"
+          max="2"
+          step=".1"
+          value="1"
+          onchange="changeAnimTime(board)"
+          id="animationTime"
+        />
+        <span id="timeValue"> 1</span>
+      </div>
+    </div>
+    <div class="container center">
+      <canvas id="mainCanvas" width="600px" height="400px"></canvas>
+    </div>
     <script src="js/utility.js"></script>
     <script src="js/visualization.js"></script>
     <script src="js/algorithms.js"></script>

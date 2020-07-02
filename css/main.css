@@ -26,11 +26,10 @@ nav h1 {
   letter-spacing: 1.1px;
 }
 
-canvas {
-  margin: 5px 15px;
-  display: block;
+.container,
+.animationControl {
+  margin: 15px;
 }
-
 button {
   background-color: #3333aa;
   border: none;
@@ -46,4 +45,38 @@ button {
 
 button:hover {
   background-color: #0000aa;
+}
+
+#animationTime {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 300px;
+  height: 6px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  outline: none;
+  background-color: rgba(51, 0, 255, 0.85);
+  box-shadow: 0px 0px 1px #fff, inset 0px 0px 1px #ddd;
+}
+
+#animationTime::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+  border: 2px solid rgb(173, 173, 173);
+  box-shadow: 0px 0px 2px #999;
+}
+
+#timeValue {
+  display: inline-block;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 4px;
+  padding: 3px 20px;
+  margin-left: 10px;
+  color: rgba(51, 0, 255, 0.6);
+  border: 2px solid rgba(51, 0, 255, 0.6);
 }
