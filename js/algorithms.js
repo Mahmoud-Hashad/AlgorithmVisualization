@@ -106,3 +106,75 @@ function selectionSort(inputArray) {
     
   return outputLog;
 }
+
+function linearSearch(inputArray) {
+  // array to hold each step of the sort
+  let outputLog = [];
+  let number = parseInt(document.getElementById("searchNumber").value);
+  if (number == undefined) {
+      number = inputArray[inputArray.length - 4];
+  }
+    
+  // loop over the array
+  for (let i = 0; i < inputArray.length; i++) {
+      // add comparison operation to output log
+      outputLog.push({
+        type: operations.compare,
+        left: i,
+        right: i,
+      });
+
+      // compare two elements and check if the first one is greater
+      if (inputArray[i] == number) {
+        // add swap operation to output log
+        outputLog.push({
+          type: operations.select,
+          left: i,
+          right: -1,
+        });
+
+          break;
+      }
+    }
+  return outputLog;
+}
+
+function binarySearch(inputArray) {
+  // array to hold each step of the sort
+  let outputLog = [];
+  let number = parseInt(document.getElementById("searchNumber").value);
+  if (number == undefined) {
+      number = inputArray[inputArray.length - 4];
+  }
+    
+ let left = 0;
+ let right = inputArray.length - 1;
+    
+    
+  while (left <= right) { 
+    let middle = left + (right - left) / 2; 
+    outputLog.push({
+        type: operations.compare,
+        left: middle,
+        right: middle,
+     });
+      
+    if (inputArray[middle] == number) {
+        outputLog.push({
+          type: operations.select,
+          left: middle,
+          right: -1,
+        });
+
+        break;
+    }
+    else if (inputArray[middle] < number) { 
+        left = middle + 1; 
+    }
+    else {
+        right = middle - 1; 
+    }
+  } 
+  
+  return outputLog;
+}

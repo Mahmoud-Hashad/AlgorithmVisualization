@@ -149,6 +149,14 @@ class Visualization {
     this.array[j].color = this.colors.ideal;
     this.draw();
   }
+    
+  async select(i) {
+      this.array[i].color = this.colors.swapped;
+      this.draw();
+      await sleep(this.time * 1000);
+      this.array[i].color = this.colors.ideal;
+      this.draw();
+  }
 
   // animate the log instructions
   async animate(sortFunc) {
@@ -172,6 +180,11 @@ class Visualization {
           this.instructions[i].right
           );
       }
+        
+      else if (this.instructions[i].type == operations.select) {
+          await this.select(this.instructions[i].left);
+      }
+        
     }
   }
 

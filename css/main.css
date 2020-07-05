@@ -33,7 +33,7 @@ nav h1 {
 }
 
 /*button styles*/
-button {
+button, input[type=button]{
   background-color: #3333aa;
   border: none;
   color: white;
@@ -46,9 +46,16 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover, input[type=button]:hover {
   background-color: #0000aa;
 }
+
+input[type=number] {
+  width: 70px;
+  height: 35px;
+  border: 2px solid #3333aa;
+}
+
 
 /* Animation time controls Styles*/
 .animationControl label {
