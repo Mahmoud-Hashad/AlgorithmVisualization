@@ -152,7 +152,7 @@ function binarySearch(inputArray) {
     
     
   while (left <= right) { 
-    let middle = left + (right - left) / 2; 
+    let middle = left + Math.floor((right - left) / 2); 
     outputLog.push({
         type: operations.compare,
         left: middle,
