@@ -33,6 +33,15 @@ nav h1 {
 }
 
 /*button styles*/
+.educationalMode {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
 button, input[type=button]{
   background-color: #3333aa;
   border: none;
@@ -109,3 +118,4 @@ footer p {
 footer a {
   color: rgba(51, 0, 255, 0.8);
 }
+

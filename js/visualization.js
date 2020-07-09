@@ -11,7 +11,7 @@ class Visualization {
 
     this.time = time; // time for the animation
     this.margin = 5; // space between the columns
-    this.numArea = 20; // the total space to wite value of each column
+    this.numArea = 20; // the total space to write value of each column
 
     // value of each column related to count of the columns
     this.scale = 3;
@@ -53,6 +53,22 @@ class Visualization {
     
     this.draw();
   }
+    
+  educationalMode() {
+    // Get the checkbox
+    var checkBox = document.getElementById("EducationalBox");
+
+    if (checkBox.checked == true) {
+      this.columHeightUnit =
+      (this.canvasHeight - this.columnWidth) / (6 * this.scale);
+      this.resize(6);
+    } 
+    else {
+      this.columHeightUnit =
+        (this.canvasHeight - this.columnWidth) / (20 * this.scale);
+      this.resize(20);
+    }
+  }
 
   at(index) {
     return this.array[index].value;
@@ -72,7 +88,7 @@ class Visualization {
     this.size = s;
     this.columnWidth = this.canvasWidth / this.size;
     this.randomize();
-    this.draw(); // mosa: add this to restart canvas after changing the size
+    this.draw();
   }
 
   setTime(s) {
