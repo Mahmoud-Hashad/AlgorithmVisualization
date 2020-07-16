@@ -153,6 +153,12 @@ function binarySearch(inputArray) {
     
   while (left <= right) { 
     let middle = left + Math.floor((right - left) / 2); 
+      
+    outputLog.push({
+        type: operations.select,
+        left: left,
+        right: right,
+    });
     outputLog.push({
         type: operations.compare,
         left: middle,

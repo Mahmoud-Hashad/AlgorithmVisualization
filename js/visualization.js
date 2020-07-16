@@ -197,8 +197,21 @@ class Visualization {
           );
       }
         
-      else if (this.instructions[i].type == operations.select) {
+      else if (this.instructions[i].type == operations.select 
+               && this.instructions[i].right == -1) {
           await this.select(this.instructions[i].left);
+      }
+        
+      else {
+          for (let x = this.instructions[i].left; x <= this.instructions[i].right; x++) {
+              this.array[x].color = "rgba(255, 0, 101, .6)";
+              this.draw();
+          }
+          await sleep(this.time * 1000);
+          for (let x = this.instructions[i].left; x <= this.instructions[i].right; x++) {
+              this.array[x].color = this.colors.ideal;
+              this.draw();
+          }
       }
         
     }
