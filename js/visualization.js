@@ -24,7 +24,8 @@ class Visualization {
     this.colors = {
       ideal: "rgba(51, 0, 255, .6)",
       swapped: "rgba(255, 0, 51, .6)",
-      compared: "rgba(204, 0, 204, .6)"
+      compared: "rgba(204, 0, 204, .6)",
+      selected: "rgba(51, 0, 255, 1)",
     };
 
     // create the array
@@ -166,12 +167,16 @@ class Visualization {
     this.draw();
   }
     
-  async select(i) {
-      this.array[i].color = this.colors.swapped;
-      this.draw();
-      await sleep(this.time * 1000);
-      this.array[i].color = this.colors.ideal;
-      this.draw();
+  async select(i, j) {
+      for (let x = 0; x < this.size; x++) {
+          this.array[x].color = this.colors.ideal;
+          this.draw();
+      }
+      
+      for (let x = i; x <= j; x++) {
+        this.array[x].color = this.colors.selected;
+        this.draw();
+      }
   }
 
   // animate the log instructions
@@ -197,21 +202,10 @@ class Visualization {
           );
       }
         
-      else if (this.instructions[i].type == operations.select 
-               && this.instructions[i].right == -1) {
-          await this.select(this.instructions[i].left);
-      }
-        
-      else {
-          for (let x = this.instructions[i].left; x <= this.instructions[i].right; x++) {
-              this.array[x].color = "rgba(255, 0, 101, .6)";
-              this.draw();
-          }
-          await sleep(this.time * 1000);
-          for (let x = this.instructions[i].left; x <= this.instructions[i].right; x++) {
-              this.array[x].color = this.colors.ideal;
-              this.draw();
-          }
+      else if (this.instructions[i].type == operations.select) {
+          await this.select(
+          this.instructions[i].left, 
+          this.instructions[i].right);
       }
         
     }

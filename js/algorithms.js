@@ -169,7 +169,7 @@ function binarySearch(inputArray) {
         outputLog.push({
           type: operations.select,
           left: middle,
-          right: -1,
+          right: middle,
         });
 
         break;
