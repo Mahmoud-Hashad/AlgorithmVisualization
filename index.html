@@ -27,8 +27,6 @@
         
       <div>
         <form>
-          <label>Search for: </label>
-          <input type="number" id="searchNumber">
           <input type="button" onclick="board.animate(linearSearch)" value="Linear Search">
           <input type="button" onclick="board.animate(binarySearch)" value="Binary Search">
         </form>  
@@ -51,6 +49,9 @@
     </div>
     <div class="container center">
       <canvas id="mainCanvas" width="600px" height="400px"></canvas>
+    </div>
+    <div>
+      <span id="boardStats">  </span>  
     </div>
 
     <!--The Footer-->
