@@ -18,7 +18,7 @@ body {
   margin: 15px;
 }
 /* header styles */
-nav {
+header {
   width: 100%;
   padding: 24px;
   margin-bottom: 20px;
@@ -27,7 +27,7 @@ nav {
   box-shadow: 0px -7px 24px 4px #00000057;
   color: #fff;
 }
-nav h1 {
+header h1 {
   font-size: 2em;
   letter-spacing: 1.1px;
 }
@@ -42,7 +42,7 @@ nav h1 {
   font-size: 22px;
 }
 
-button, input[type=button]{
+button, input[type=button], select {
   background-color: #3333aa;
   border: none;
   color: white;
@@ -55,16 +55,9 @@ button, input[type=button]{
   cursor: pointer;
 }
 
-button:hover, input[type=button]:hover {
+button:hover, input[type=button]:hover, select:hover {
   background-color: #0000aa;
 }
-
-input[type=number] {
-  width: 70px;
-  height: 35px;
-  border: 2px solid #3333aa;
-}
-
 
 /* Animation time controls Styles*/
 .animationControl label {
@@ -73,7 +66,6 @@ input[type=number] {
 }
 #animationTime {
   appearance: none;
-  -webkit-appearance: none;
   width: 300px;
   height: 6px;
   border: 1px solid #ddd;
@@ -81,17 +73,6 @@ input[type=number] {
   outline: none;
   background-color: rgba(51, 0, 255, 0.85);
   box-shadow: 0px 0px 1px #fff, inset 0px 0px 1px #ddd;
-}
-
-#animationTime::-webkit-slider-thumb {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  background-color: #eee;
-  border-radius: 50%;
-  border: 2px solid rgb(173, 173, 173);
-  box-shadow: 0px 0px 2px #999;
 }
 
 #timeValue {

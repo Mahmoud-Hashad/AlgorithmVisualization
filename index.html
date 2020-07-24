@@ -8,28 +8,37 @@
   </head>
   <body>
     <!--website Header-->
-    <nav>
+    <header>
       <h1>Algorithm Visualization</h1>
-    </nav>
+    </header>
+      
+    <!--nav bar-->
+      <nav>
+        <a href="#">FCI Suez</a>
+          <a href="#">Normal Mode</a>
+          <a href="#=">Educational Mode</a>
+          <a href="#">Comparison Mode</a>
+          <a href="#">About Us</a>
+      </nav>
+      
     <!--Algorithm controls -->
     <div class="container controls">
-        <label class="educationalMode">Educational Mode
-            <input type="checkbox" id="EducationalBox" onclick="board.educationalMode()">
-            <span class="checkmark"></span>
-        </label>
       <!--buttons like randomize the values and change the visualized algorithm-->
       <div class="buttons">
         <button onclick="board.randomize()">Randomize</button>
-        <button onclick="board.animate(insertionSort)">Insertion Sort</button>
-        <button onclick="board.animate(bubbleSort)">Bubble Sort</button>
-        <button onclick="board.animate(selectionSort)">Selection Sort</button>
-      </div>
-        
-      <div>
-        <form>
-          <input type="button" onclick="board.animate(linearSearch)" value="Linear Search">
-          <input type="button" onclick="board.animate(binarySearch)" value="Binary Search">
-        </form>  
+        <select name="algorithms" id="algorithms">
+            <optgroup label="Searching">
+              <option value="linearSearch">Linear Search</option>
+              <option value="binarySearch">Binary Search</option>
+            </optgroup>
+            <optgroup label="Sorting">
+              <option value="insertionSort">Insertion Sort</option>
+              <option value="bubbleSort">Bubble Sort</option>
+              <option value="selectionSort">Selection Sort</option>
+            </optgroup>
+          </select>
+          <button onclick="start()">Start</button>
+          <button onclick="stop()">Stop</button>
       </div>
       <!--controls to change the animation -->
       <div class="animationControl">
