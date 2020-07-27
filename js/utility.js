@@ -30,7 +30,12 @@ function changeAnimTime(board) {
   // timeValue element to match the new value of time
   document.getElementById("timeValue").innerText = rangeValue;
 }
-
+// code is object hold all the different code of each algorithm
+// each algorithm have:
+//  - ideal (required)
+//  - swap
+//  - compare
+//  - select
 let code = {
   bubbleSort: {
     ideal: `function swap(arr, i, j) {
