@@ -26,7 +26,7 @@ class Visualization {
       ideal: "rgba(51, 0, 255, .6)",
       swapped: "rgba(255, 0, 51, .6)",
       compared: "rgba(204, 0, 204, .6)",
-      selected: "rgba(51, 0, 255, 1)"
+      selected: "rgba(51, 0, 255, 1)",
     };
 
     // create the array
@@ -49,7 +49,7 @@ class Visualization {
         // random value [1, size * scale - 2]
         value: Math.floor(1 + Math.random() * (this.size * this.scale - 2)),
         x: this.columnWidth * i,
-        color: this.colors.ideal
+        color: this.colors.ideal,
       };
     }
 
@@ -194,12 +194,8 @@ class Visualization {
     // iterate over every instruction / step
     for (let i = 0; i < this.instructions.length && this.running; i++) {
       // update the board stats
-      this.stats.innerHTML = `${this.instructions[i].type} ${
-        this.instructions[i].left
-      } and ${
-        this.instructions[i].right
-      }, Compares: ${nCompares}, Swaps: ${nSwaps}.`;
-        
+      this.stats.innerHTML = `${this.instructions[i].type} ${this.instructions[i].left} and ${this.instructions[i].right}, Compares: ${nCompares}, Swaps: ${nSwaps}.`;
+
       // animate the operation
       if (this.instructions[i].type == operations.swap) {
         await this.swapAnimation(
@@ -220,7 +216,7 @@ class Visualization {
         );
       }
     }
-      
+
     // stats final update
     this.stats.innerHTML = `Array is sorted successfully! Compares: ${nCompares}, Swaps: ${nSwaps}.`;
   }

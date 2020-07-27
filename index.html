@@ -8,25 +8,26 @@
   </head>
   <body>
     <!--website Header-->
-    <header>
-      <h1>Algorithm Visualization</h1>
-    </header>
-      
+
     <!--nav bar-->
-      <nav>
-        <a href="#">FCI Suez</a>
-          <a href="#">Normal Mode</a>
-          <a href="#=">Educational Mode</a>
-          <a href="#">Comparison Mode</a>
-          <a href="#">About Us</a>
-      </nav>
-      
-    <!--Algorithm controls -->
-    <div class="container controls">
-      <!--buttons like randomize the values and change the visualized algorithm-->
-      <div class="buttons">
-        <button onclick="board.randomize()">Randomize</button>
-        <select name="algorithms" id="algorithms">
+    <nav>
+      <header>
+        <h1>Algorithm Visualization</h1>
+      </header>
+      <div>
+        <a href="#">Normal Mode</a>
+        <a href="#=">Educational Mode</a>
+        <a href="#">Comparison Mode</a>
+        <a href="#">About Us</a>
+      </div>
+    </nav>
+    <div class="container">
+      <!--Algorithm controls -->
+      <div class="container controls">
+        <!--buttons like randomize the values and change the visualized algorithm-->
+        <div class="buttons">
+          <button onclick="board.randomize()">Randomize</button>
+          <select name="algorithms" id="algorithms">
             <optgroup label="Searching">
               <option value="linearSearch">Linear Search</option>
               <option value="binarySearch">Binary Search</option>
@@ -39,30 +40,30 @@
           </select>
           <button onclick="start()">Start</button>
           <button onclick="stop()">Stop</button>
+        </div>
+        <!--controls to change the animation -->
+        <div class="animationControl">
+          <!--change the time of the animation-->
+          <label>Animation Time:</label>
+          <input
+            type="range"
+            min=".1"
+            max="2"
+            step=".1"
+            value="1"
+            onchange="changeAnimTime(board)"
+            id="animationTime"
+          />
+          <span id="timeValue"> 1</span>
+        </div>
       </div>
-      <!--controls to change the animation -->
-      <div class="animationControl">
-        <!--change the time of the animation-->
-        <label>Animation Time:</label>
-        <input
-          type="range"
-          min=".1"
-          max="2"
-          step=".1"
-          value="1"
-          onchange="changeAnimTime(board)"
-          id="animationTime"
-        />
-        <span id="timeValue"> 1</span>
+      <div class="container center">
+        <canvas id="mainCanvas" width="600px" height="400px"></canvas>
+      </div>
+      <div>
+        <span id="boardStats"> </span>
       </div>
     </div>
-    <div class="container center">
-      <canvas id="mainCanvas" width="600px" height="400px"></canvas>
-    </div>
-    <div>
-      <span id="boardStats">  </span>  
-    </div>
-
     <!--The Footer-->
     <footer>
       <p>

@@ -9,7 +9,7 @@ function bubbleSort(inputArray) {
       outputLog.push({
         type: operations.compare,
         left: j,
-        right: j + 1
+        right: j + 1,
       });
 
       // compare two elements and check if the first one is greater
@@ -18,7 +18,7 @@ function bubbleSort(inputArray) {
         outputLog.push({
           type: operations.swap,
           left: j,
-          right: j + 1
+          right: j + 1,
         });
 
         // make the acutal swap
@@ -40,7 +40,7 @@ function insertionSort(inputArray) {
       outputLog.push({
         type: operations.compare,
         left: j - 1,
-        right: j
+        right: j,
       });
 
       // compare two elements and check if the first one is greater
@@ -49,7 +49,7 @@ function insertionSort(inputArray) {
         outputLog.push({
           type: operations.swap,
           left: j - 1,
-          right: j
+          right: j,
         });
 
         // make the acutal swap
@@ -72,7 +72,7 @@ function selectionSort(inputArray) {
       outputLog.push({
         type: operations.compare,
         left: min,
-        right: j
+        right: j,
       });
 
       // compare two elements and check if the first one is greater
@@ -83,7 +83,7 @@ function selectionSort(inputArray) {
         outputLog.push({
           type: operations.select,
           left: min,
-          right: -1
+          right: -1,
         });
       }
     }
@@ -92,7 +92,7 @@ function selectionSort(inputArray) {
     outputLog.push({
       type: operations.swap,
       left: i,
-      right: min
+      right: min,
     });
 
     // make the acutal swap
@@ -112,7 +112,7 @@ function linearSearch(inputArray) {
     outputLog.push({
       type: operations.compare,
       left: i,
-      right: i
+      right: i,
     });
 
     // compare two elements and check if the first one is greater
@@ -121,7 +121,7 @@ function linearSearch(inputArray) {
       outputLog.push({
         type: operations.select,
         left: i,
-        right: -1
+        right: -1,
       });
 
       break;
@@ -143,19 +143,19 @@ function binarySearch(inputArray) {
     outputLog.push({
       type: operations.select,
       left: left,
-      right: right
+      right: right,
     });
     outputLog.push({
       type: operations.compare,
       left: middle,
-      right: middle
+      right: middle,
     });
 
     if (inputArray[middle] == key) {
       outputLog.push({
         type: operations.select,
         left: middle,
-        right: middle
+        right: middle,
       });
 
       break;
