@@ -30,6 +30,26 @@ function changeAnimTime(board) {
   // timeValue element to match the new value of time
   document.getElementById("timeValue").innerText = rangeValue;
 }
+
+let description = {
+  linearSearch: `Linear Search:
+  Linear search is a very simple search algorithm. In this type of search, a sequential search is made over all items one by one. Every item is checked and if a match is found then that particular item is returned, otherwise the search continues till the end of the data collection.
+  Complexity: O(n)`,
+  binarySearch: `Binary Search:
+  Binary Search Searches a sorted array by repeatedly dividing the search interval in half. Begin with an interval covering the whole array. If the value of the search key is less than the item in the middle of the interval, narrow the interval to the lower half. Otherwise narrow it to the upper half. Repeatedly check until the value is found or the interval is empty.
+  Complexity: O(log n)`,
+  insertionSort: `Insertion sort:
+  Insertion sort is a simple sorting algorithm that works similar to the way you sort playing cards in your hands. The array is virtually split into a sorted and an unsorted part. Values from the unsorted part are picked and placed at the correct position in the sorted part.
+  Complexity: O(n2)`,
+  selectionSort: `Selection Sort:
+  The selection sort algorithm sorts an array by repeatedly finding the minimum element (considering ascending order) from unsorted part and putting it at the beginning. The algorithm maintains two subarrays in a given array.
+  Complexity: O(n2)
+  `,
+  bubbleSort: `Bubble Sort:
+  Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in wrong order.
+  Complexity: O(n2)`,
+};
+
 // code is object hold all the different code of each algorithm
 // each algorithm have:
 //  - ideal (required)

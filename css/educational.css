@@ -4,6 +4,10 @@
 .buttons {
   text-align: center;
 }
+
+#boardStats {
+  margin-left: 15px;
+}
 .inline {
   display: inline-flex;
   align-content: stretch;
@@ -34,6 +38,15 @@
   max-height: 175px;
   min-height: 175px;
 }
+
+#desc {
+  min-height: 175px;
+  background-color: rgb(175, 175, 175);
+  padding: 12px 9px;
+  border-radius: 5px;
+  margin: 15px;
+}
+
 .ideal {
   color: rgba(51, 0, 255);
 }
