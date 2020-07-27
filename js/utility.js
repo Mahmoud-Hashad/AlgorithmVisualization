@@ -31,6 +31,286 @@ function changeAnimTime(board) {
   document.getElementById("timeValue").innerText = rangeValue;
 }
 
+let code = {
+  bubbleSort: {
+    ideal: `function swap(arr, i, j) {
+      let t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    function bubbleSort(inputArray) {  
+      // loop over the array
+      for (let i = 0; i < inputArray.length; i++) {
+        for (let j = 0; j < inputArray.length - i - 1; j++) {  
+            // swap j and j + 1
+            swap(inputArray, j, j + 1);
+          }
+        }
+      }
+    }`,
+    swap: `function swap(arr, i, j) {
+      let t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    function bubbleSort(inputArray) {  
+      // loop over the array
+      for (let i = 0; i < inputArray.length; i++) {
+        if (inputArray[j] > inputArray[j + 1]) {
+          // swap j and j + 1
+          <span class="swap">swap(inputArray, j, j + 1);</span>
+        }
+      }
+    }`,
+    compare: `function swap(arr, i, j) {
+      let t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    function bubbleSort(inputArray) {  
+      // loop over the array
+      for (let i = 0; i < inputArray.length; i++) {
+        for (let j = 0; j < inputArray.length - i - 1; j++) {  
+          <span class="compare">if (inputArray[j] > inputArray[j + 1])</span> {
+            // swap j and j + 1
+            swap(inputArray, j, j + 1);
+            
+          }
+        }
+      }
+    }`,
+  },
+  insertionSort: {
+    ideal: `function swap(arr, i, j) {
+    let t = arr[i];
+    arr[i] = arr[j];
+    arr[j] = t;
+  }
+  function insertionSort(inputArray) {  
+    // loop over the array
+    for (let i = 1; i < inputArray.length; i++) {
+      for (let j = i; j > 0; j--) {
+      
+        // compare two elements and check if the first one is greater
+        if (inputArray[j] < inputArray[j - 1]) {
+  
+          // swap j and j -1
+          swap(inputArray, j, j - 1);
+        } else break;
+      }
+    }
+  }
+  `,
+    swap: `function swap(arr, i, j) {
+    let t = arr[i];
+    arr[i] = arr[j];
+    arr[j] = t;
+  }
+  function insertionSort(inputArray) {  
+    // loop over the array
+    for (let i = 1; i < inputArray.length; i++) {
+      for (let j = i; j > 0; j--) {
+      
+        // compare two elements and check if the first one is greater
+        if (inputArray[j] < inputArray[j - 1]) {
+  
+          // swap j and j -1
+          <span class="swap">swap(inputArray, j, j - 1);</span>
+        } else break;
+      }
+    }
+  }
+  `,
+    compare: `function swap(arr, i, j) {
+    let t = arr[i];
+    arr[i] = arr[j];
+    arr[j] = t;
+  }
+  function insertionSort(inputArray) {  
+    // loop over the array
+    for (let i = 1; i < inputArray.length; i++) {
+      for (let j = i; j > 0; j--) {
+      
+        // compare two elements and check if the first one is greater
+        <span class="compare">if (inputArray[j] < inputArray[j - 1])</span> {
+  
+          // swap j and j -1
+          swap(inputArray, j, j - 1);
+        } else break;
+      }
+    }
+  }
+  `,
+  },
+  selectionSort: {
+    ideal: `function swap(arr, i, j) {
+      let t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    function selectionSort(inputArray) {
+      // loop over the array
+      for (let i = 0; i < inputArray.length - 1; i++) {
+        let min = i;
+        for (let j = i + 1; j < inputArray.length; j++) {
+          // compare two elements and check if the first one is greater
+          if (inputArray[j] < inputArray[min]) {
+            // change the min variable
+            min = j;
+          }
+        }
+        // make the acutal swap
+        swap(inputArray, i, min);
+      }
+    }`,
+    swap: `function swap(arr, i, j) {
+      let t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    function selectionSort(inputArray) {
+      // loop over the array
+      for (let i = 0; i < inputArray.length - 1; i++) {
+        let min = i;
+        for (let j = i + 1; j < inputArray.length; j++) {
+          // compare two elements and check if the first one is greater
+          if (inputArray[j] < inputArray[min]) {
+            // change the min variable
+            min = j;
+          }
+        }
+        // swap the i with the min
+        <span class="swap">swap(inputArray, i, min);</span>
+      }
+    }`,
+    compare: `function swap(arr, i, j) {
+      let t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    function selectionSort(inputArray) {
+      // loop over the array
+      for (let i = 0; i < inputArray.length - 1; i++) {
+        let min = i;
+        for (let j = i + 1; j < inputArray.length; j++) {
+          // compare two elements and check if the first one is greater
+          <span class="compare">if (inputArray[j] < inputArray[min])</span> {
+            // change the min variable
+            min = j;
+          }
+        }
+        // make the acutal swap
+        swap(inputArray, i, min);
+      }
+    }`,
+    select: `function swap(arr, i, j) {
+      let t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    function selectionSort(inputArray) {
+      // loop over the array
+      for (let i = 0; i < inputArray.length - 1; i++) {
+        let min = i;
+        for (let j = i + 1; j < inputArray.length; j++) {
+          // compare two elements and check if the first one is greater
+          if (inputArray[j] < inputArray[min]) {
+            // change the min variable
+            <span class="select">min = j;</span>
+          }
+        }
+        // make the acutal swap
+        swap(inputArray, i, min);
+      }
+    }`,
+  },
+  linearSearch: {
+    ideal: `function linearSearch(inputArray, key) {
+      // loop over the array
+      for (let i = 0; i < inputArray.length; i++) {
+        // compare two elements and check if the first one is greater
+        if (inputArray[i] == key) {
+          return i;
+        }
+      }
+    }`,
+    compare: `function linearSearch(inputArray, key) {
+      // loop over the array
+      for (let i = 0; i < inputArray.length; i++) {
+        // compare two elements and check if the first one is greater
+        <span class="compare">if (inputArray[i] == key)</span> {
+          return i;
+        }
+      }
+    }`,
+    select: `function linearSearch(inputArray, key) {
+      // loop over the array
+      for (let i = 0; i < inputArray.length; i++) {
+        // compare two elements and check if the first one is greater
+        if (inputArray[i] == key) {
+          <span class="select"> return i;</span>
+        }
+      }
+    }`,
+  },
+  binarySearch: {
+    ideal: `function binarySearch(inputArray, key) {
+      let left = 0;
+      let right = inputArray.length - 1;
+    
+      while (left <= right) {
+        find the middle index of the elements
+        let middle = left + Math.floor((right - left) / 2);
+        
+        // compare the middle element with the key
+        if (inputArray[middle] == key){    
+          return middle;
+        } else if (inputArray[middle] < key) {
+          left = middle + 1;
+        } else {
+          right = middle - 1;
+        }
+      }
+    }`,
+    compare: `function binarySearch(inputArray, key) {
+      let left = 0;
+      let right = inputArray.length - 1;
+    
+      while (left <= right) {
+        find the middle index of the elements
+        let middle = left + Math.floor((right - left) / 2);
+        
+        // compare the middle element with the key
+        <span class="compare">if (inputArray[middle] == key)</span> {    
+          return middle;
+        } else if (inputArray[middle] < key) {
+          left = middle + 1;
+        } else {
+          right = middle - 1;
+        }
+      }
+    }`,
+    select: `function binarySearch(inputArray, key) {
+      let left = 0;
+      let right = inputArray.length - 1;
+    
+      while (left <= right) {
+        find the middle index of the elements
+        <span class="select">let middle = left + Math.floor((right - left) / 2);</span>
+        
+        // compare the middle element with the key
+        if (inputArray[middle] == key) {    
+          return middle;
+        } else if (inputArray[middle] < key) {
+          left = middle + 1;
+        } else {
+          right = middle - 1;
+        }
+      }
+    }`,
+  },
+};
+
 // round rect
 // from: https://stackoverflow.com/questions/1255512/how-to-draw-a-rounded-rectangle-on-html-canvas
 // note: modify some signs of the height to work with the negative

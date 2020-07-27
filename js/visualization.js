@@ -56,21 +56,6 @@ class Visualization {
     this.draw();
   }
 
-  educationalMode() {
-    // Get the checkbox
-    var checkBox = document.getElementById("EducationalBox");
-
-    if (checkBox.checked == true) {
-      this.columHeightUnit =
-        (this.canvasHeight - this.columnWidth) / (6 * this.scale);
-      this.resize(6);
-    } else {
-      this.columHeightUnit =
-        (this.canvasHeight - this.columnWidth) / (20 * this.scale);
-      this.resize(20);
-    }
-  }
-
   at(index) {
     return this.array[index].value;
   }
@@ -180,14 +165,20 @@ class Visualization {
   }
 
   // animate the log instructions
-  async animate(sortFunc) {
+  async animate(sortFunc, log, code_obj) {
     // stop any other function to start this one
     this.running = false;
     document.getElementById("startbtn").disabled = true;
     await sleep(2100);
     document.getElementById("startbtn").disabled = false;
     this.running = true;
-
+    var logList = null;
+    var code_c = null;
+    if (log == true) {
+      logList = document.getElementById("log-list");
+      logList.innerHTML = "";
+      code_c = document.getElementById("code");
+    }
     // variables to work with
     this.instructions = sortFunc(this.toArray());
     let nSwaps = 0;
@@ -197,7 +188,15 @@ class Visualization {
     for (let i = 0; i < this.instructions.length && this.running; i++) {
       // update the board stats
       this.stats.innerHTML = `${this.instructions[i].type} ${this.instructions[i].left} and ${this.instructions[i].right}, Compares: ${nCompares}, Swaps: ${nSwaps}.`;
-
+      if (log == true) {
+        logList.innerHTML += `<li class='${this.instructions[i].type}'> ${
+          i + 1
+        } - ${this.instructions[i].type} element at index ${
+          this.instructions[i].left
+        } and ${this.instructions[i].right} </li>`;
+        logList.scrollTop = logList.scrollHeight;
+        code_c.innerHTML = code_obj[this.instructions[i].type];
+      }
       // animate the operation
       if (this.instructions[i].type == operations.swap) {
         await this.swapAnimation(
@@ -221,6 +220,9 @@ class Visualization {
 
     // stats final update
     this.stats.innerHTML = `Array is sorted successfully! Compares: ${nCompares}, Swaps: ${nSwaps}.`;
+    if (log == true) {
+      code_c.innerHTML = code_obj.ideal;
+    }
   }
 
   draw() {

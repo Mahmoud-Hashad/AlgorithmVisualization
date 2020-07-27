@@ -1,0 +1,48 @@
+.wrapper {
+  text-align: left;
+}
+.buttons {
+  text-align: center;
+}
+.inline {
+  display: inline-flex;
+  align-content: stretch;
+  margin: 0;
+  padding: 15px;
+  width: 100%;
+}
+#educational-data {
+  padding-left: 20px;
+  width: 100%;
+}
+#educational-data div,
+#educational-data pre {
+  height: 49%;
+  width: 100%;
+  background-color: rgb(175, 175, 175);
+  padding: 12px 9px;
+  border-radius: 5px;
+}
+
+#educational-data div {
+  margin-bottom: 2%;
+}
+
+#log-list,
+#educational-data pre {
+  overflow: auto;
+  max-height: 175px;
+  min-height: 175px;
+}
+.ideal {
+  color: rgba(51, 0, 255);
+}
+.swap {
+  color: rgba(255, 0, 51);
+}
+.compare {
+  color: rgba(204, 0, 204);
+}
+.select {
+  color: rgba(51, 0, 255);
+}
