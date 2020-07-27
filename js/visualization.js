@@ -183,7 +183,9 @@ class Visualization {
   async animate(sortFunc) {
     // stop any other function to start this one
     this.running = false;
-    await sleep(this.time * 1100);
+    document.getElementById("startbtn").disabled = true;
+    await sleep(2100);
+    document.getElementById("startbtn").disabled = false;
     this.running = true;
 
     // variables to work with
