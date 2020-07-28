@@ -1,4 +1,4 @@
-let board = new Visualization("mainCanvas", 20, 1);
+let board = new Visualization("mainCanvas", 20, 1, "boardStats");
 
 function start() {
   let algoMenu = document.getElementById("algorithms");

@@ -1,9 +1,9 @@
 class Visualization {
-  constructor(canvasId, size, time) {
+  constructor(canvasId, size, time, boardStatId) {
     // store canvas and its context
     this.canvas = document.getElementById(canvasId);
     this.ctx = this.canvas.getContext("2d");
-    this.stats = document.getElementById("boardStats");
+    this.stats = document.getElementById(boardStatId);
 
     // save canvas width and height and calc column width
     this.canvasWidth = this.canvas.width;

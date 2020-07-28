@@ -1,4 +1,4 @@
-let board = new Visualization("mainCanvas", 10, 1.8);
+let board = new Visualization("mainCanvas", 10, 1.8, "boardStats");
 
 function start() {
   // get the selected algorithm name

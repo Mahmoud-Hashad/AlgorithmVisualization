@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Algorithm Visualization</title>
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/comparison.css" />
   </head>
   <body>
     <!--website Header-->
@@ -26,8 +27,21 @@
       <div class="container controls">
         <!--buttons like randomize the values and change the visualized algorithm-->
         <div class="buttons">
-          <button id="rand" onclick="board.randomize()">Randomize</button>
-          <select name="algorithms" id="algorithms">
+          <button id="rand" onclick="board1.randomize(); board2.randomize()">
+            Randomize
+          </button>
+          <select name="algorithms" id="algorithms1">
+            <optgroup label="Searching">
+              <option value="linearSearch">Linear Search</option>
+              <option value="binarySearch">Binary Search</option>
+            </optgroup>
+            <optgroup label="Sorting">
+              <option value="insertionSort">Insertion Sort</option>
+              <option value="bubbleSort">Bubble Sort</option>
+              <option value="selectionSort">Selection Sort</option>
+            </optgroup>
+          </select>
+          <select name="algorithms" id="algorithms2">
             <optgroup label="Searching">
               <option value="linearSearch">Linear Search</option>
               <option value="binarySearch">Binary Search</option>
@@ -50,18 +64,27 @@
             min=".1"
             max="2"
             step=".1"
-            value="1"
-            onchange="changeAnimTime(board)"
+            value=".5"
+            onchange="changeAnimTime(board1), changeAnimTime(board2)"
             id="animationTime"
           />
           <span id="timeValue"> 1</span>
         </div>
       </div>
-      <div class="container center">
-        <canvas id="mainCanvas" width="600px" height="400px"></canvas>
-      </div>
-      <div>
-        <span id="boardStats"> </span>
+      <div class="container center flex">
+        <div>
+          <canvas id="mainCanvas" width="600px" height="400px"></canvas>
+          <div>
+            <span id="boardStats1"> </span>
+          </div>
+        </div>
+
+        <div>
+          <canvas id="secondCanvas" width="600px" height="400px"></canvas>
+          <div>
+            <span id="boardStats2"> </span>
+          </div>
+        </div>
       </div>
     </div>
     <!--The Footer-->
@@ -75,6 +98,6 @@
     <script src="js/utility.js"></script>
     <script src="js/visualization.js"></script>
     <script src="js/algorithms.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/comparison.js"></script>
   </body>
 </html>
