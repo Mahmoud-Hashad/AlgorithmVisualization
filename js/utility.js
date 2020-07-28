@@ -66,9 +66,11 @@ let code = {
     function bubbleSort(inputArray) {  
       // loop over the array
       for (let i = 0; i < inputArray.length; i++) {
-        for (let j = 0; j < inputArray.length - i - 1; j++) {  
+        for (let j = 0; j < inputArray.length - i - 1; j++) { 
+          if (inputArray[j] > inputArray[j + 1]) { 
             // swap j and j + 1
             swap(inputArray, j, j + 1);
+            
           }
         }
       }
@@ -81,9 +83,12 @@ let code = {
     function bubbleSort(inputArray) {  
       // loop over the array
       for (let i = 0; i < inputArray.length; i++) {
-        if (inputArray[j] > inputArray[j + 1]) {
-          // swap j and j + 1
-          <span class="swap">swap(inputArray, j, j + 1);</span>
+        for (let j = 0; j < inputArray.length - i - 1; j++) { 
+          if (inputArray[j] > inputArray[j + 1]) {
+            // swap j and j + 1
+            <span class="swap">swap(inputArray, j, j + 1);</span>
+
+          }
         }
       }
     }`,
