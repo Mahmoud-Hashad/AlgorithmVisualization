@@ -50,6 +50,7 @@ class Visualization {
       this.running = false;
       await sleep(this.time * 1100);
     }
+    document.getElementById("rand").disabled = true;
     let localArray = [];
     // start a new visualization with random numbers
     for (let i = 0; i < this.size; i++) {
@@ -77,6 +78,7 @@ class Visualization {
       await sleep(10);
     } while (flag == true);
     this.draw();
+    document.getElementById("rand").disabled = false;
   }
 
   at(index) {
