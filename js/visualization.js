@@ -35,24 +35,47 @@ class Visualization {
 
     this.running = false;
   }
-
-  async randomize() {
-    // stop any running funcion from continuing
-    if (this.running == true) {
-      this.running = false;
-      await sleep(this.time * 1100);
-    }
-
-    // start a new visualization with random numbers
+  initializeArray() {
     for (let i = 0; i < this.size; i++) {
       this.array[i] = {
-        // random value [1, size * scale - 2]
-        value: Math.floor(1 + Math.random() * (this.size * this.scale - 2)),
+        value: 0,
         x: this.columnWidth * i,
         color: this.colors.ideal,
       };
     }
+  }
+  async randomize() {
+    // stop any running function from continuing
+    if (this.running == true) {
+      this.running = false;
+      await sleep(this.time * 1100);
+    }
+    let localArray = [];
+    // start a new visualization with random numbers
+    for (let i = 0; i < this.size; i++) {
+      localArray[i] = Math.floor(
+        1 + Math.random() * (this.size * this.scale - 2)
+      );
+      this.array.x = this.columnWidth * i;
+      this.array.color = this.colors.ideal;
+    }
 
+    let flag = false;
+    do {
+      flag = false;
+      for (let i = 0; i < this.size; i++) {
+        if (localArray[i] != this.array[i].value) {
+          flag = true;
+          if (localArray[i] > this.array[i].value) {
+            this.array[i].value++;
+          } else {
+            this.array[i].value--;
+          }
+        }
+      }
+      this.draw();
+      await sleep(10);
+    } while (flag == true);
     this.draw();
   }
 
@@ -73,6 +96,7 @@ class Visualization {
     // change the size and start a new visual.
     this.size = s;
     this.columnWidth = this.canvasWidth / this.size;
+    this.initializeArray(s);
     this.randomize();
     this.draw();
   }
