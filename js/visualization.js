@@ -26,6 +26,7 @@ class Visualization {
       ideal: "rgba(51, 0, 255, .6)",
       swapped: "rgba(255, 0, 51, .6)",
       compared: "rgba(204, 0, 204, .6)",
+      okay: "rgba(0, 151, 51, .6)",
       selected: "rgba(51, 0, 255, 1)",
     };
 
@@ -164,8 +165,8 @@ class Visualization {
 
     // if the compare results doing nothing
     if (this.at(i) < this.at(j)) {
-      this.array[i].color = this.colors.swapped;
-      this.array[j].color = this.colors.swapped;
+      this.array[i].color = this.colors.okay;
+      this.array[j].color = this.colors.okay;
 
       // draw the updates
       this.draw();
@@ -180,14 +181,13 @@ class Visualization {
 
   async select(i, j) {
     for (let x = 0; x < this.size; x++) {
-      this.array[x].color = this.colors.ideal;
-      this.draw();
+      if (x < i || x > j)
+        this.array[x].color = this.colors.ideal;
+      else
+        this.array[x].color = this.colors.selected;
     }
 
-    for (let x = i; x <= j; x++) {
-      this.array[x].color = this.colors.selected;
-      this.draw();
-    }
+    this.draw();
   }
 
   // animate the log instructions
@@ -195,9 +195,11 @@ class Visualization {
     // stop any other function to start this one
     this.running = false;
     document.getElementById("startbtn").disabled = true;
-    await sleep(2100);
+    await sleep(1000);
     document.getElementById("startbtn").disabled = false;
-    this.running = true;
+    this.running = true;  
+    
+    // set up log and code if educational mode
     var logList = null;
     var code_c = null;
     if (log == true) {
@@ -205,24 +207,25 @@ class Visualization {
       logList.innerHTML = "";
       code_c = document.getElementById("code");
     }
+      
     // variables to work with
     this.instructions = sortFunc(this.toArray());
     let nSwaps = 0;
     let nCompares = 0;
-
+    let tempMessage = "";
+      
+    // update the board stats
+    this.stats.innerHTML = `${this.instructions[0].message}\nCompares: ${nCompares}, Swaps: ${nSwaps}.`;
+      
     // iterate over every instruction / step
-    for (let i = 0; i < this.instructions.length && this.running; i++) {
-      // update the board stats
-      this.stats.innerHTML = `${this.instructions[i].type} ${this.instructions[i].left} and ${this.instructions[i].right}, Compares: ${nCompares}, Swaps: ${nSwaps}.`;
+    for (let i = 1; i < this.instructions.length - 1 && this.running; i++) {        
+      // update log and code  
       if (log == true) {
-        logList.innerHTML += `<li class='${this.instructions[i].type}'> ${
-          i + 1
-        } - ${this.instructions[i].type} element at index ${
-          this.instructions[i].left
-        } and ${this.instructions[i].right} </li>`;
+        logList.innerHTML += `<li class='${this.instructions[i].type}'> ${i + 1} - ${this.instructions[i].message} </li>`;
         logList.scrollTop = logList.scrollHeight;
         code_c.innerHTML = code_obj[this.instructions[i].type];
       }
+        
       // animate the operation
       if (this.instructions[i].type == operations.swap) {
         await this.swapAnimation(
@@ -244,8 +247,9 @@ class Visualization {
       }
     }
 
-    // stats final update
-    this.stats.innerHTML = `Array is sorted successfully! Compares: ${nCompares}, Swaps: ${nSwaps}.`;
+    // stats and code final update
+    this.stats.innerHTML = `${this.instructions[this.instructions.length - 1].message}
+Compares: ${nCompares}, Swaps: ${nSwaps}.`;
     if (log == true) {
       code_c.innerHTML = code_obj.ideal;
     }

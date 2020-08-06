@@ -1,6 +1,10 @@
 function bubbleSort(inputArray) {
   // array to hold each step of the sort
   outputLog = [];
+    
+  outputLog.push({
+      message: "Sorting array using Bubble Sort",
+  }); 
 
   // loop over the array
   for (let i = 0; i < inputArray.length; i++) {
@@ -10,6 +14,7 @@ function bubbleSort(inputArray) {
         type: operations.compare,
         left: j,
         right: j + 1,
+        message: "compare element at index " + j + " with " + (j+1),
       });
 
       // compare two elements and check if the first one is greater
@@ -19,6 +24,7 @@ function bubbleSort(inputArray) {
           type: operations.swap,
           left: j,
           right: j + 1,
+            message: "swap element at index " + j + " with " + (j+1),
         });
 
         // make the acutal swap
@@ -26,6 +32,10 @@ function bubbleSort(inputArray) {
       }
     }
   }
+    
+  outputLog.push({
+      message: "Bubble Sort completed successfully, array is sorted",
+  });    
   return outputLog;
 }
 
@@ -33,6 +43,10 @@ function insertionSort(inputArray) {
   // array to hold each step of the sort
   outputLog = [];
 
+  outputLog.push({
+      message: "Sorting array using Insertion Sort",
+  });    
+    
   // loop over the array
   for (let i = 1; i < inputArray.length; i++) {
     for (let j = i; j > 0; j--) {
@@ -41,6 +55,7 @@ function insertionSort(inputArray) {
         type: operations.compare,
         left: j - 1,
         right: j,
+        message: "compare element at index " + (j-1) + " with " + j,
       });
 
       // compare two elements and check if the first one is greater
@@ -50,6 +65,7 @@ function insertionSort(inputArray) {
           type: operations.swap,
           left: j - 1,
           right: j,
+          message: "swap element at index " + (j-1) + " with " + j,
         });
 
         // make the acutal swap
@@ -57,6 +73,10 @@ function insertionSort(inputArray) {
       } else break;
     }
   }
+    
+  outputLog.push({
+      message: "Insertion Sort completed successfully, array is sorted",
+  });
   return outputLog;
 }
 
@@ -64,6 +84,10 @@ function selectionSort(inputArray) {
   // array to hold each step of the sort
   outputLog = [];
 
+  outputLog.push({
+      message: "Sorting array using Selection Sort",
+  });    
+    
   // loop over the array
   for (let i = 0; i < inputArray.length - 1; i++) {
     let min = i;
@@ -73,6 +97,7 @@ function selectionSort(inputArray) {
         type: operations.compare,
         left: min,
         right: j,
+        message: "compare element at index " + min + " with " + j,
       });
 
       // compare two elements and check if the first one is greater
@@ -84,6 +109,7 @@ function selectionSort(inputArray) {
           type: operations.select,
           left: min,
           right: -1,
+          message: "select element at " + min + " as minimum" ,
         });
       }
     }
@@ -93,12 +119,16 @@ function selectionSort(inputArray) {
       type: operations.swap,
       left: i,
       right: min,
+      message: "swap element at index " + i + " with " + min,
     });
 
     // make the acutal swap
     swap(inputArray, i, min);
   }
 
+  outputLog.push({
+      message: "Selection Sort completed successfully, array is sorted",
+  });
   return outputLog;
 }
 
@@ -106,13 +136,19 @@ function linearSearch(inputArray) {
   let outputLog = [];
   let key = inputArray[Math.floor(Math.random() * inputArray.length)];
 
+  outputLog.push({
+      message: "Searching for " + key + " using linear search",
+    });    
+    
   // loop over the array
-  for (let i = 0; i < inputArray.length; i++) {
+  let i;
+  for (i = 0; i < inputArray.length; i++) {
     // add comparison operation to output log
     outputLog.push({
       type: operations.compare,
       left: i,
       right: i,
+      message: "compare element at index " + i + " with the key",
     });
 
     // compare two elements and check if the first one is greater
@@ -122,11 +158,17 @@ function linearSearch(inputArray) {
         type: operations.select,
         left: i,
         right: -1,
+        message: "key is found at index " + i,
       });
 
       break;
     }
   }
+    
+  outputLog.push({
+      message: "Linear Search completed successfully, key is found at index " + i
+  });    
+    
   return outputLog;
 }
 
@@ -136,19 +178,26 @@ function binarySearch(inputArray) {
   let key = inputArray[Math.floor(Math.random() * inputArray.length)];
   let left = 0;
   let right = inputArray.length - 1;
+  let middle;
+    
+  outputLog.push({
+      message: "Searching for " + key + " using binary search",
+    });
 
   while (left <= right) {
-    let middle = left + Math.floor((right - left) / 2);
+    middle = left + Math.floor((right - left) / 2);
 
     outputLog.push({
       type: operations.select,
       left: left,
       right: right,
+      message: "set search interval from index " + left + " to " + right,
     });
     outputLog.push({
       type: operations.compare,
       left: middle,
       right: middle,
+      message: "compare the middle element at index " + middle + " with key",
     });
 
     if (inputArray[middle] == key) {
@@ -156,6 +205,7 @@ function binarySearch(inputArray) {
         type: operations.select,
         left: middle,
         right: middle,
+        message: "key is found at index " + middle,
       });
 
       break;
@@ -165,6 +215,10 @@ function binarySearch(inputArray) {
       right = middle - 1;
     }
   }
+    
+  outputLog.push({
+      message: "Binary Search completed successfully, key is found at index " + middle,
+  });
 
   return outputLog;
 }
