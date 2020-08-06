@@ -181,13 +181,15 @@ class Visualization {
 
   async select(i, j) {
     for (let x = 0; x < this.size; x++) {
-      if (x < i || x > j)
         this.array[x].color = this.colors.ideal;
-      else
+    }
+      
+    for (let x = i; x <= j && x >= 0; x++) {
         this.array[x].color = this.colors.selected;
     }
 
     this.draw();
+    await sleep(this.time * 500);
   }
 
   // animate the log instructions
@@ -207,6 +209,11 @@ class Visualization {
       logList.innerHTML = "";
       code_c = document.getElementById("code");
     }
+     
+    // make sure colors are normal
+    for (let x = 0; x < this.size; x++) {
+        this.array[x].color = this.colors.ideal;
+    }
       
     // variables to work with
     this.instructions = sortFunc(this.toArray());
@@ -215,7 +222,7 @@ class Visualization {
     let tempMessage = "";
       
     // update the board stats
-    this.stats.innerHTML = `${this.instructions[0].message}\nCompares: ${nCompares}, Swaps: ${nSwaps}.`;
+    this.stats.innerHTML = `${this.instructions[0].message}\nCompares: ${nCompares}, Swaps: ${nSwaps}`;
       
     // iterate over every instruction / step
     for (let i = 1; i < this.instructions.length - 1 && this.running; i++) {        
@@ -248,8 +255,7 @@ class Visualization {
     }
 
     // stats and code final update
-    this.stats.innerHTML = `${this.instructions[this.instructions.length - 1].message}
-Compares: ${nCompares}, Swaps: ${nSwaps}.`;
+    this.stats.innerHTML = `${this.instructions[this.instructions.length - 1].message}\nCompares: ${nCompares}, Swaps: ${nSwaps}`;
     if (log == true) {
       code_c.innerHTML = code_obj.ideal;
     }

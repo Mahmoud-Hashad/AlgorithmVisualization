@@ -59,151 +59,151 @@ let description = {
 let code = {
   bubbleSort: {
     ideal: `function bubbleSort(arr, n) {  
-      for (let i = 0; i < n; i++)
-        for (let j = 0; j < n - i - 1; j++)
-          if (arr[j] > arr[j + 1])
-            swap(j, j + 1);
-    }`,
+  for (let i = 0; i < n; i++)
+    for (let j = 0; j < n - i - 1; j++)
+      if (arr[j] > arr[j + 1])
+        swap(j, j + 1);
+}`,
     swap: `function bubbleSort(arr, n) {  
-      for (let i = 0; i < n; i++)
-        for (let j = 0; j < n - i - 1; j++)
-          if (arr[j] > arr[j + 1])
-            <span class="swap">swap(j, j + 1);</span>
-    }`,
+  for (let i = 0; i < n; i++)
+    for (let j = 0; j < n - i - 1; j++)
+      if (arr[j] > arr[j + 1])
+        <span class="swap">swap(j, j + 1);</span>
+}`,
     compare: `function bubbleSort(arr, n) {  
-      for (let i = 0; i < n; i++)
-        for (let j = 0; j < n - i - 1; j++)
-          <span class="compare">if (arr[j] > arr[j + 1])</span>
-            swap(j, j + 1);
-    }`,
+  for (let i = 0; i < n; i++)
+    for (let j = 0; j < n - i - 1; j++)
+      <span class="compare">if (arr[j] > arr[j + 1])</span>
+        swap(j, j + 1);
+}`,
   },
   insertionSort: {
     ideal: `function insertionSort(arr, n) {  
-    for (let i = 1; i < n; i++)
-      for (let j = i; j > 0; j--)
-        if (arr[j] < arr[j - 1])
-            swap(j, j - 1);
-        else 
-            break;
-  }`,
+for (let i = 1; i < n; i++)
+  for (let j = i; j > 0; j--)
+    if (arr[j] < arr[j - 1])
+        swap(j, j - 1);
+    else 
+        break;
+}`,
     swap: `function insertionSort(arr, n) {  
-    for (let i = 1; i < n; i++)
-      for (let j = i; j > 0; j--)
-        if (arr[j] < arr[j - 1])
-            <span class="swap">swap(j, j - 1);</span>
-        else 
-            break;
-  }`,
+for (let i = 1; i < n; i++)
+  for (let j = i; j > 0; j--)
+    if (arr[j] < arr[j - 1])
+        <span class="swap">swap(j, j - 1);</span>
+    else 
+        break;
+}`,
     compare: `function insertionSort(arr, n) {  
-    for (let i = 1; i < n; i++)
-      for (let j = i; j > 0; j--)
-        <span class="compare">if (arr[j] < arr[j - 1])</span>
-            swap(j, j - 1);
-        else 
-            break;
-  }`,
+for (let i = 1; i < n; i++)
+  for (let j = i; j > 0; j--)
+    <span class="compare">if (arr[j] < arr[j - 1])</span>
+        swap(j, j - 1);
+    else 
+        break;
+}`,
   },
   selectionSort: {
     ideal: `function selectionSort(arr, n) {
-      for (let i = 0; i < n - 1; i++) {
-        let min = i;
-        for (let j = i + 1; j < n; j++)
-          if (arr[j] < arr[min])
-            min = j;
-        swap(i, min);
-      }
-    }`,
+  for (let i = 0; i < n - 1; i++) {
+    let min = i;
+    for (let j = i + 1; j < n; j++)
+      if (arr[j] < arr[min])
+        min = j;
+    swap(i, min);
+  }
+}`,
     swap: `function selectionSort(arr, n) {
-      for (let i = 0; i < n - 1; i++) {
-        let min = i;
-        for (let j = i + 1; j < n; j++)
-          if (arr[j] < arr[min])
-            min = j;
-        <span class="swap">swap(i, min)</span>;
-      }
-    }`,
+  for (let i = 0; i < n - 1; i++) {
+    let min = i;
+    for (let j = i + 1; j < n; j++)
+      if (arr[j] < arr[min])
+        min = j;
+    <span class="swap">swap(i, min)</span>;
+  }
+}`,
     compare: `function selectionSort(arr, n) {
-      for (let i = 0; i < n - 1; i++) {
-        let min = i;
-        for (let j = i + 1; j < n; j++)
-          <span class = "compare">if (arr[j] < arr[min])</span>
-            min = j;
-        swap(i, min);
-      }
+  for (let i = 0; i < n - 1; i++) {
+    let min = i;
+    for (let j = i + 1; j < n; j++)
+      <span class = "compare">if (arr[j] < arr[min])</span>
+        min = j;
+    swap(i, min);
+  }
     }`,
     select: `function selectionSort(arr, n) {
-      for (let i = 0; i < n - 1; i++) {
-        let min = i;
-        for (let j = i + 1; j < n; j++)
-          if (arr[j] < arr[min])
-            <span class="select">min = j;</span>
-        swap(i, min);
-      }
-    }`,
+  for (let i = 0; i < n - 1; i++) {
+    let min = i;
+    for (let j = i + 1; j < n; j++)
+      if (arr[j] < arr[min])
+        <span class="select">min = j;</span>
+    swap(i, min);
+  }
+}`,
   },
   linearSearch: {
     ideal: `function linearSearch(arr, n, key) {
-      for (let i = 0; i < n; i++)
-        if (arr[i] == key)
-          return i;
-    }`,
+  for (let i = 0; i < n; i++)
+    if (arr[i] == key)
+      return i;
+}`,
     compare: `function linearSearch(arr, n, key) {
-      for (let i = 0; i < n; i++)
-        <span class="compare">if (arr[i] == key)</span>
-          return i;
-    }`,
+  for (let i = 0; i < n; i++)
+    <span class="compare">if (arr[i] == key)</span>
+      return i;
+}`,
     select: `function linearSearch(arr, n, key) {
-      for (let i = 0; i < n; i++)
-        if (arr[i] == key)
-          <span class="select">return i;</span>
-    }`,
+  for (let i = 0; i < n; i++)
+    if (arr[i] == key)
+      <span class="select">return i;</span>
+}`,
   },
   binarySearch: {
     ideal: `function binarySearch(arr, n, key) {
-      let left = 0;
-      let right = n - 1;
-    
-      while (left <= right) {
-        let middle = left + (right - left) / 2;
-        
-        if (arr[middle] == key)    
-          return middle;
-        else if (arr[middle] < key)
-          left = middle + 1;
-        else
-          right = middle - 1;
-      }
-    }`,
+  let left = 0;
+  let right = n - 1;
+
+  while (left <= right) {
+    let middle = left + (right - left) / 2;
+
+    if (arr[middle] == key)    
+      return middle;
+    else if (arr[middle] < key)
+      left = middle + 1;
+    else
+      right = middle - 1;
+  }
+}`,
     compare: `function binarySearch(arr, n, key) {
-      let left = 0;
-      let right = n - 1;
-    
-      while (left <= right) {
-        let middle = left + (right - left) / 2;
-        
-        if (arr[middle] == key)    
-          return middle;
-        else if (arr[middle] < key)
-          left = middle + 1;
-        else
-          right = middle - 1;
-      }
-    }`,
+  let left = 0;
+  let right = n - 1;
+
+  while (left <= right) {
+    let middle = left + (right - left) / 2;
+
+    if (arr[middle] == key)    
+      return middle;
+    else if (arr[middle] < key)
+      left = middle + 1;
+    else
+      right = middle - 1;
+  }
+}`,
     select: `function binarySearch(arr, n, key) {
-      let left = 0;
-      let right = n - 1;
-    
-      while (left <= right) {
-        let middle = left + (right - left) / 2;
-        
-        if (arr[middle] == key)    
-          return middle;
-        else if (arr[middle] < key)
-          left = middle + 1;
-        else
-          right = middle - 1;
-      }
-    }`,
+  let left = 0;
+  let right = n - 1;
+
+  while (left <= right) {
+    let middle = left + (right - left) / 2;
+
+    if (arr[middle] == key)    
+      return middle;
+    else if (arr[middle] < key)
+      left = middle + 1;
+    else
+      right = middle - 1;
+  }
+}`,
   },
 };
 
