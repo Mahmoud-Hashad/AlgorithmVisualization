@@ -119,15 +119,17 @@ class Visualization {
     // save the starting point and distance
     let start = this.array[i].x;
     let distance = this.array[j].x - this.array[i].x;
+      
     // color the swapped indices
     this.array[i].color = this.colors.swapped;
     this.array[j].color = this.colors.swapped;
 
     // animate the swap
-
-    // if swap is finished
     while (true) {
+        
+      // if swap is finished
       if (this.array[j].x <= start) {
+          
         // swap them in array
         let temp = this.array[i];
         this.array[i] = this.array[j];
@@ -148,7 +150,7 @@ class Visualization {
 
       // draw the update
       this.draw();
-      await sleep((this.time / distance) * 1000);
+      await sleep(this.time / distance * 1000);
     }
   }
 
