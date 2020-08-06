@@ -219,19 +219,21 @@ class Visualization {
     this.instructions = sortFunc(this.toArray());
     let nSwaps = 0;
     let nCompares = 0;
-    let tempMessage = "";
-      
-    // update the board stats
-    this.stats.innerHTML = `${this.instructions[0].message}\nCompares: ${nCompares}, Swaps: ${nSwaps}`;
+    
+    if (this.instructions.length == 0)
+        this.running = false;
       
     // iterate over every instruction / step
-    for (let i = 1; i < this.instructions.length - 1 && this.running; i++) {        
-      // update log and code  
+    for (let i = 0; i < this.instructions.length && this.running; i++) {        
+      // update log and code
       if (log == true) {
         logList.innerHTML += `<li class='${this.instructions[i].type}'> ${i + 1} - ${this.instructions[i].message} </li>`;
         logList.scrollTop = logList.scrollHeight;
         code_c.innerHTML = code_obj[this.instructions[i].type];
       }
+      
+      // update the board stats    
+      this.stats.innerHTML = `${this.instructions[0].message}\nCompares: ${nCompares}, Swaps: ${nSwaps}`;    
         
       // animate the operation
       if (this.instructions[i].type == operations.swap) {
@@ -254,8 +256,13 @@ class Visualization {
       }
     }
 
-    // stats and code final update
-    this.stats.innerHTML = `${this.instructions[this.instructions.length - 1].message}\nCompares: ${nCompares}, Swaps: ${nSwaps}`;
+    // stats final update
+    if (this.running)
+        this.stats.innerHTML = `${this.instructions[this.instructions.length - 1].message}\nCompares: ${nCompares}, Swaps: ${nSwaps}`;
+    else
+        this.stats.innerHTML = "Aborted";
+    
+    // code final update
     if (log == true) {
       code_c.innerHTML = code_obj.ideal;
     }

@@ -19,7 +19,7 @@
         <a href="./index.html">Normal Mode</a>
         <a href="./educational.html">Educational Mode</a>
         <a href="./comparison.html">Comparison Mode</a>
-        <a href="#">About Us</a>
+        <a href="./about.html">About Us</a>
       </div>
     </nav>
     <div class="wrapper">
@@ -28,7 +28,7 @@
         <!--buttons like randomize the values and change the visualized algorithm-->
         <div class="buttons">
           <button id="rand" onclick="board.randomize()">Randomize</button>
-          <select name="algorithms" id="algorithms">
+          <select name="algorithms" id="algorithms" onchange="change()">
             <optgroup label="Searching">
               <option value="linearSearch">Linear Search</option>
               <option value="binarySearch">Binary Search</option>

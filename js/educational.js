@@ -1,17 +1,24 @@
 let board = new Visualization("mainCanvas", 10, 1.8, "boardStats");
+let algoMenu = document.getElementById("algorithms");
+let logList = document.getElementById("log-list");
+let code_c = document.getElementById("code");
+let desc = document.getElementById("desc");
 
 function start() {
-  // get the selected algorithm name
-  let algoMenu = document.getElementById("algorithms");
   let algorithm = algoMenu.options[algoMenu.selectedIndex].value;
-  // change the code innerHTML with the algorithm code
-  document.getElementById("code").innerHTML = code[algorithm]["ideal"];
-
+  logList.innerHTML = "";
+  code_c.innerHTML = code[algorithm]["ideal"];
+  desc.innerHTML = description[algorithm];
   board.animate(eval(algorithm), true, code[algorithm]);
-  // change the description to the algorithm description
-  document.getElementById("desc").innerHTML = description[algorithm];
 }
 
 function stop() {
   board.running = false;
+}
+
+function change() {
+    let algorithm = algoMenu.options[algoMenu.selectedIndex].value;
+    logList.innerHTML = "";
+    code_c.innerHTML = code[algorithm]["ideal"];
+    desc.innerHTML = description[algorithm];
 }

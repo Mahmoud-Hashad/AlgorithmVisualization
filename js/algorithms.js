@@ -135,7 +135,6 @@ function selectionSort(inputArray) {
 function linearSearch(inputArray) {
   let outputLog = [];
   let key = inputArray[Math.floor(Math.random() * inputArray.length)];
-
   outputLog.push({
       message: "Searching for " + key + " using linear search",
     });    
@@ -158,7 +157,7 @@ function linearSearch(inputArray) {
         type: operations.select,
         left: i,
         right: -1,
-        message: "key is found at index " + i,
+        message: key + " is found at index " + i,
       });
 
       break;
@@ -166,19 +165,25 @@ function linearSearch(inputArray) {
   }
     
   outputLog.push({
-      message: "Linear Search completed successfully, key is found at index " + i
+      message: "Linear Search completed successfully, " + key + " is found at index " + i
   });    
     
   return outputLog;
 }
 
-function binarySearch(inputArray) {
+function binarySearch(inputArray) {   
   // array to hold each step of the sort
   let outputLog = [];
   let key = inputArray[Math.floor(Math.random() * inputArray.length)];
   let left = 0;
   let right = inputArray.length - 1;
   let middle;
+    
+  // check that array is sorted
+  if (!isSorted(inputArray)) {
+      alert("Array has to be sorted to perform Binary Search")
+      return outputLog;
+  }    
     
   outputLog.push({
       message: "Searching for " + key + " using binary search",
