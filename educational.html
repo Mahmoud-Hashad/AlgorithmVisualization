@@ -22,13 +22,15 @@
         <a href="./about.html">About Us</a>
       </div>
     </nav>
+      
     <div class="wrapper">
       <!--Algorithm controls -->
       <div class="container controls">
         <!--buttons like randomize the values and change the visualized algorithm-->
         <div class="buttons">
-          <button id="rand" onclick="board.randomize()">Randomize</button>
+          <button id="rand" onclick="board.change(board.getRandArray());">Randomize</button>
           <select name="algorithms" id="algorithms" onchange="change()">
+            <option disabled selected hidden>Select Algo</option>
             <optgroup label="Searching">
               <option value="linearSearch">Linear Search</option>
               <option value="binarySearch">Binary Search</option>
@@ -39,18 +41,22 @@
               <option value="selectionSort">Selection Sort</option>
             </optgroup>
           </select>
-          <button id="startbtn" onclick="start()">Start</button>
+          <button id="startbtn" disabled onclick="start()">Start</button>
           <button onclick="stop()">Stop</button>
         </div>
       </div>
       <div class="container center inline">
         <div>
+          <div id="controls" style="display: none;">
+            <button id="playpause" onclick="playpause()"><b>&#9654;</b></button>
+            <button id="forword" onclick="forward()"><b>>></b></button>
+          </div>
           <canvas id="mainCanvas" width="600px" height="400px"></canvas>
         </div>
         <div id="educational-data">
           <div id="log">
             <ul id="log-list">
-              <li>Algorithm Log</li>
+                <li>Algorithm Logs</li>
             </ul>
           </div>
           <pre id="code">this is the code</pre>
@@ -59,8 +65,9 @@
       <div>
         <pre id="boardStats"> </pre>
       </div>
-      <div id="desc">Algorithm description</div>
+      <pre id="desc">Algorithm description</pre>
     </div>
+      
     <!--The Footer-->
     <footer>
       <p>
@@ -69,6 +76,7 @@
         <a href="https://github.com/abdomosa1999">Abdo Mosa</a>
       </p>
     </footer>
+      
     <script src="js/utility.js"></script>
     <script src="js/visualization.js"></script>
     <script src="js/algorithms.js"></script>

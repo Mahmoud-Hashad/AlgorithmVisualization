@@ -14,7 +14,7 @@ function bubbleSort(inputArray) {
         type: operations.compare,
         left: j,
         right: j + 1,
-        message: "compare element at index " + j + " with " + (j+1),
+        message: "compare " + inputArray[j] + " at index " + j + " with " + inputArray[j+1] + " at index " + (j+1),
       });
 
       // compare two elements and check if the first one is greater
@@ -24,7 +24,7 @@ function bubbleSort(inputArray) {
           type: operations.swap,
           left: j,
           right: j + 1,
-            message: "swap element at index " + j + " with " + (j+1),
+            message: "swap them",
         });
 
         // make the acutal swap
@@ -55,7 +55,7 @@ function insertionSort(inputArray) {
         type: operations.compare,
         left: j - 1,
         right: j,
-        message: "compare element at index " + (j-1) + " with " + j,
+        message: "compare " + inputArray[j-1] + " at index " + (j-1) + " with " + inputArray[j] + " at index " + (j),
       });
 
       // compare two elements and check if the first one is greater
@@ -65,7 +65,7 @@ function insertionSort(inputArray) {
           type: operations.swap,
           left: j - 1,
           right: j,
-          message: "swap element at index " + (j-1) + " with " + j,
+          message: "swap " + inputArray[j-1] + " at index " + (j-1) + " with " + inputArray[j] + " at index " + (j),
         });
 
         // make the acutal swap
@@ -97,7 +97,7 @@ function selectionSort(inputArray) {
         type: operations.compare,
         left: min,
         right: j,
-        message: "compare element at index " + min + " with " + j,
+        message: "compare " + inputArray[min] + " at index " + (min) + " with " + inputArray[j] + " at index " + (j),
       });
 
       // compare two elements and check if the first one is greater
@@ -119,7 +119,7 @@ function selectionSort(inputArray) {
       type: operations.swap,
       left: i,
       right: min,
-      message: "swap element at index " + i + " with " + min,
+      message: "swap " + inputArray[min] + " at index " + (min) + " with " + inputArray[i] + " at index " + (i),
     });
 
     // make the acutal swap
@@ -147,7 +147,7 @@ function linearSearch(inputArray) {
       type: operations.compare,
       left: i,
       right: i,
-      message: "compare element at index " + i + " with the key",
+      message: "compare " + inputArray[i] + " at index " + (i) + " with key",
     });
 
     // compare two elements and check if the first one is greater
@@ -181,7 +181,7 @@ function binarySearch(inputArray) {
     
   // check that array is sorted
   if (!isSorted(inputArray)) {
-      alert("Array has to be sorted to perform Binary Search")
+      alert("Array has to be sorted to perform Binary Search");
       return outputLog;
   }    
     
@@ -202,7 +202,7 @@ function binarySearch(inputArray) {
       type: operations.compare,
       left: middle,
       right: middle,
-      message: "compare the middle element at index " + middle + " with key",
+      message: "compare the middle element " + inputArray[middle] + " at index " + middle + " with key",
     });
 
     if (inputArray[middle] == key) {

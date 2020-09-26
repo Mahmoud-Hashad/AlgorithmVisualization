@@ -1,128 +1,92 @@
 class Visualization {
-  constructor(canvasId, size, time, boardStatId) {
-    // store canvas and its context
-    this.canvas = document.getElementById(canvasId);
+  constructor(canvas, size, time, stats) {
+    // store canvas and its properties
+    this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
-    this.stats = document.getElementById(boardStatId);
-
-    // save canvas width and height and calc column width
+    this.stats = stats;
     this.canvasWidth = this.canvas.width;
     this.canvasHeight = this.canvas.height;
-    this.columnWidth = Math.round(this.canvasWidth / size);
 
-    this.time = time; // time for the animation
+    this.time = time * 1000; // time for the animation
     this.margin = 5; // space between the columns
     this.numArea = 20; // the total space to write value of each column
 
-    // value of each column related to count of the columns
-    this.scale = 3;
-
-    // each 1 in colum value = height px
-    this.columHeightUnit =
-      (this.canvasHeight - this.columnWidth) / (size * this.scale);
-
-    // define global colors
-    this.colors = {
-      ideal: "rgba(51, 0, 255, .6)",
-      swapped: "rgba(255, 0, 51, .6)",
-      compared: "rgba(204, 0, 204, .6)",
-      okay: "rgba(0, 151, 51, .6)",
-      selected: "rgba(51, 0, 255, 1)",
-    };
-
-    // create the array
+    // make calculations from size
+    this.size = size;
+    this.columnWidth = Math.round(this.canvasWidth / this.size);;
+    this.columHeightUnit = Math.floor((this.canvasHeight - this.numArea) / (this.size * 3));
+      
+    // initialize array
     this.array = [];
-    this.resize(size);
-
-    this.running = false;
-  }
-  initializeArray() {
     for (let i = 0; i < this.size; i++) {
       this.array[i] = {
         value: 0,
         x: this.columnWidth * i,
-        color: this.colors.ideal,
+        color: colors.ideal,
       };
     }
+    
+    // keep track of board state
+    this.state = {i: 1, instructions: [], nSwaps: 0, nCompares: 0};
+    this.running = false;
   }
-  async randomize() {
+ 
+  getRandArray() {
+    let localArray = [];
+    for (let i = 0; i < this.size; i++) {
+      localArray[i] = Math.floor(
+        Math.random() * ((this.canvasHeight - this.numArea) / this.columHeightUnit - 1) + 1);
+    }
+    return localArray;
+  }
+    
+  async change(arr) {
     // stop any running function from continuing
     if (this.running == true) {
       this.running = false;
-      await sleep(this.time * 1100);
+      await sleep(this.time);
     }
+      
+    // disable button until finished
     document.getElementById("rand").disabled = true;
-    let localArray = [];
-    // start a new visualization with random numbers
-    for (let i = 0; i < this.size; i++) {
-      localArray[i] = Math.floor(
-        1 + Math.random() * (this.size * this.scale - 2)
-      );
-      this.array.x = this.columnWidth * i;
-      this.array.color = this.colors.ideal;
-    }
-
+      
+    // animate the change
     let flag = false;
     do {
       flag = false;
       for (let i = 0; i < this.size; i++) {
-        if (localArray[i] != this.array[i].value) {
+        if (arr[i] != this.array[i].value) {
           flag = true;
-          if (localArray[i] > this.array[i].value) {
+          if (arr[i] > this.array[i].value) {
             this.array[i].value++;
           } else {
             this.array[i].value--;
           }
         }
       }
-      this.draw();
+        
+      this.draw();        
       await sleep(10);
     } while (flag == true);
-    this.draw();
+    
     document.getElementById("rand").disabled = false;
-  }
-
-  at(index) {
-    return this.array[index].value;
-  }
-
-  // a method to turn the object array into a numeric array
-  toArray() {
-    let array = [];
-    for (let i = 0; i < this.size; i++) {
-      array[i] = this.array[i].value;
-    }
-    return array;
-  }
-
-  resize(s) {
-    // change the size and start a new visual.
-    this.size = s;
-    this.columnWidth = this.canvasWidth / this.size;
-    this.initializeArray(s);
-    this.randomize();
-    this.draw();
-  }
-
-  setTime(s) {
-    this.time = s;
   }
 
   async swapAnimation(i, j) {
     // check that i is the left col
     if (i > j) {
-      let t = i;
-      i = j;
-      j = t;
+      let t = i; i = j; j = t;
     }
 
     // save the starting point and distance
     let start = this.array[i].x;
+    let end = this.array[j].x;
     let distance = this.array[j].x - this.array[i].x;
+    let step = Math.ceil(distance * 4 / this.time);
       
     // color the swapped indices
-    this.array[i].color = this.colors.swapped;
-    this.array[j].color = this.colors.swapped;
+    this.array[i].color = colors.swapped;
+    this.array[j].color = colors.swapped;
 
     // animate the swap
     while (true) {
@@ -136,138 +100,119 @@ class Visualization {
         this.array[j] = temp;
 
         // restore color
-        this.array[i].color = this.colors.ideal;
-        this.array[j].color = this.colors.ideal;
+        this.array[i].color = colors.ideal;
+        this.array[j].color = colors.ideal;
 
         // end animation
         this.draw();
-        return;
+        break;
       }
 
-      // move each col 1 pixel at a time
-      this.array[i].x += 1;
-      this.array[j].x -= 1;
+      // move each col 1 step at a time
+      if (this.array[j].x - start > step) {
+        this.array[i].x += step;
+        this.array[j].x -= step;
+      } 
+      else {
+        this.array[i].x = end;
+        this.array[j].x = start;
+      }
 
       // draw the update
       this.draw();
-      await sleep(this.time / distance * 1000);
+      await sleep(this.time / distance);
     }
   }
 
   // animate the compare
-  // this works as j supposed to be > i
   async compareAnimation(i, j) {
+    // check that i is the left col
+    if (i > j) {
+      let t = i; i = j; j = t;
+    }
+      
     // color the compared indices
-    this.array[i].color = this.colors.compared;
-    this.array[j].color = this.colors.compared;
+    this.array[i].color = colors.compared;
+    this.array[j].color = colors.compared;
 
     // draw the update
     this.draw();
-    await sleep(this.time * 1000);
+    await sleep(2 * this.time / 3);
 
-    // if the compare results doing nothing
-    if (this.at(i) < this.at(j)) {
-      this.array[i].color = this.colors.okay;
-      this.array[j].color = this.colors.okay;
-
-      // draw the updates
-      this.draw();
-      await sleep(this.time * 1000);
+    // see compare results
+    if (this.at(i) <= this.at(j)) {
+      this.array[i].color = colors.okay;
+      this.array[j].color = colors.okay;
     }
+    else {
+      this.array[i].color = colors.swapped;
+      this.array[j].color = colors.swapped;
+    }
+      
+    // draw the updates
+    this.draw();
+    await sleep(this.time / 3);
 
     // restore everything
-    this.array[i].color = this.colors.ideal;
-    this.array[j].color = this.colors.ideal;
+    this.array[i].color = colors.ideal;
+    this.array[j].color = colors.ideal;
     this.draw();
   }
 
   async select(i, j) {
+    // make sure all colors are default
     for (let x = 0; x < this.size; x++) {
-        this.array[x].color = this.colors.ideal;
+        this.array[x].color = colors.ideal;
     }
-      
+    
+    // color the indexed interval
     for (let x = i; x <= j && x >= 0; x++) {
-        this.array[x].color = this.colors.selected;
+        this.array[x].color = colors.selected;
     }
-
+    
+    // visualize
     this.draw();
-    await sleep(this.time * 500);
+    await sleep(this.time);
   }
+  
+  // animate an instruction
+  // handles board and stats
+  async animate() {
 
-  // animate the log instructions
-  async animate(sortFunc, log, code_obj) {
-    // stop any other function to start this one
-    this.running = false;
-    document.getElementById("startbtn").disabled = true;
-    await sleep(1000);
-    document.getElementById("startbtn").disabled = false;
-    this.running = true;  
-    
-    // set up log and code if educational mode
-    var logList = null;
-    var code_c = null;
-    if (log == true) {
-      logList = document.getElementById("log-list");
-      logList.innerHTML = "";
-      code_c = document.getElementById("code");
-    }
-     
-    // make sure colors are normal
-    for (let x = 0; x < this.size; x++) {
-        this.array[x].color = this.colors.ideal;
+    // if algorithm is finished
+    if (this.state.i == this.state.instructions.length - 1) {
+        this.stats.innerHTML = `${this.state.instructions[this.state.i].message}\nCompares: ${this.state.nCompares}, Swaps: ${this.state.nSwaps}`;
+        return;
     }
       
-    // variables to work with
-    this.instructions = sortFunc(this.toArray());
-    let nSwaps = 0;
-    let nCompares = 0;
-    
-    if (this.instructions.length == 0)
-        this.running = false;
-      
-    // iterate over every instruction / step
-    for (let i = 0; i < this.instructions.length && this.running; i++) {        
-      // update log and code
-      if (log == true) {
-        logList.innerHTML += `<li class='${this.instructions[i].type}'> ${i + 1} - ${this.instructions[i].message} </li>`;
-        logList.scrollTop = logList.scrollHeight;
-        code_c.innerHTML = code_obj[this.instructions[i].type];
+    // if beyond
+    if (this.state.i >= this.state.instructions.length)
+        return; 
+
+    // animate the operation
+    if (this.state.instructions[this.state.i].type == operations.swap) {
+        await this.swapAnimation(
+          this.state.instructions[this.state.i].left,
+          this.state.instructions[this.state.i].right
+        );
+        this.state.nSwaps++;
+      }
+      else if (this.state.instructions[this.state.i].type == operations.compare) {
+        await this.compareAnimation(
+          this.state.instructions[this.state.i].left,
+          this.state.instructions[this.state.i].right
+        );
+        this.state.nCompares++;
+      }
+      else if (this.state.instructions[this.state.i] == operations.select) {
+        await this.select(
+          this.state.instructions[this.state.i].left,
+          this.state.instructions[this.state.i].right
+        );
       }
       
       // update the board stats    
-      this.stats.innerHTML = `${this.instructions[0].message}\nCompares: ${nCompares}, Swaps: ${nSwaps}`;    
-        
-      // animate the operation
-      if (this.instructions[i].type == operations.swap) {
-        await this.swapAnimation(
-          this.instructions[i].left,
-          this.instructions[i].right
-        );
-        nSwaps++;
-      } else if (this.instructions[i].type == operations.compare) {
-        await this.compareAnimation(
-          this.instructions[i].left,
-          this.instructions[i].right
-        );
-        nCompares++;
-      } else if (this.instructions[i].type == operations.select) {
-        await this.select(
-          this.instructions[i].left,
-          this.instructions[i].right
-        );
-      }
-    }
-
-    // stats final update
-    if (this.running)
-        this.stats.innerHTML = `${this.instructions[this.instructions.length - 1].message}\nCompares: ${nCompares}, Swaps: ${nSwaps}`;
-    else
-        this.stats.innerHTML = "Aborted";
-    
-    // code final update
-    if (log == true) {
-      code_c.innerHTML = code_obj.ideal;
-    }
+      this.stats.innerHTML = `${this.state.instructions[0].message}\nCompares: ${this.state.nCompares}, Swaps: ${this.state.nSwaps}`;  
   }
 
   draw() {
@@ -292,5 +237,24 @@ class Visualization {
 
     // remaps the (0,0) position to the top left
     this.ctx.translate(0, -this.canvasHeight);
+  }
+    
+  /* ==== Helper Methods ==== */
+    
+  at(index) {
+    return this.array[index].value;
+  }
+
+  // a method to turn the object array into a numeric array
+  toArray() {
+    let array = [];
+    for (let i = 0; i < this.size; i++) {
+      array[i] = this.array[i].value;
+    }
+    return array;
+  }
+    
+  setTime(t) {
+      this.time = t * 1000;
   }
 }

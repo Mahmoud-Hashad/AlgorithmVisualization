@@ -4,21 +4,6 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// define global operations
-const operations = {
-  swap: "swap",
-  compare: "compare",
-  select: "select",
-};
-
-// function swap
-// swap two element of an array
-function swap(arr, i, j) {
-  let t = arr[i];
-  arr[i] = arr[j];
-  arr[j] = t;
-}
-
 // function to change animation time
 function changeAnimTime(board) {
   // select the range element and get its value
@@ -30,182 +15,6 @@ function changeAnimTime(board) {
   // timeValue element to match the new value of time
   document.getElementById("timeValue").innerText = rangeValue;
 }
-
-let description = {
-  linearSearch: `Linear Search:
-  Linear search is a very simple search algorithm. In this type of search, a sequential search is made over all items one by one. Every item is checked and if a match is found then that particular item is returned, otherwise the search continues till the end of the data collection.
-  Complexity: O(n)`,
-  binarySearch: `Binary Search:
-  Binary Search Searches a sorted array by repeatedly dividing the search interval in half. Begin with an interval covering the whole array. If the value of the search key is less than the item in the middle of the interval, narrow the interval to the lower half. Otherwise narrow it to the upper half. Repeatedly check until the value is found or the interval is empty.
-  Complexity: O(log n)`,
-  insertionSort: `Insertion sort:
-  Insertion sort is a simple sorting algorithm that works similar to the way you sort playing cards in your hands. The array is virtually split into a sorted and an unsorted part. Values from the unsorted part are picked and placed at the correct position in the sorted part.
-  Complexity: O(n2)`,
-  selectionSort: `Selection Sort:
-  The selection sort algorithm sorts an array by repeatedly finding the minimum element (considering ascending order) from unsorted part and putting it at the beginning. The algorithm maintains two subarrays in a given array.
-  Complexity: O(n2)
-  `,
-  bubbleSort: `Bubble Sort:
-  Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in wrong order.
-  Complexity: O(n2)`,
-};
-
-// code is object hold all the different code of each algorithm
-// each algorithm have:
-//  - ideal (required)
-//  - swap
-//  - compare
-//  - select
-let code = {
-  bubbleSort: {
-    ideal: `function bubbleSort(arr, n) {  
-  for (let i = 0; i < n; i++)
-    for (let j = 0; j < n - i - 1; j++)
-      if (arr[j] > arr[j + 1])
-        swap(j, j + 1);
-}`,
-    swap: `function bubbleSort(arr, n) {  
-  for (let i = 0; i < n; i++)
-    for (let j = 0; j < n - i - 1; j++)
-      if (arr[j] > arr[j + 1])
-        <span class="swap">swap(j, j + 1);</span>
-}`,
-    compare: `function bubbleSort(arr, n) {  
-  for (let i = 0; i < n; i++)
-    for (let j = 0; j < n - i - 1; j++)
-      <span class="compare">if (arr[j] > arr[j + 1])</span>
-        swap(j, j + 1);
-}`,
-  },
-  insertionSort: {
-    ideal: `function insertionSort(arr, n) {  
-for (let i = 1; i < n; i++)
-  for (let j = i; j > 0; j--)
-    if (arr[j] < arr[j - 1])
-        swap(j, j - 1);
-    else 
-        break;
-}`,
-    swap: `function insertionSort(arr, n) {  
-for (let i = 1; i < n; i++)
-  for (let j = i; j > 0; j--)
-    if (arr[j] < arr[j - 1])
-        <span class="swap">swap(j, j - 1);</span>
-    else 
-        break;
-}`,
-    compare: `function insertionSort(arr, n) {  
-for (let i = 1; i < n; i++)
-  for (let j = i; j > 0; j--)
-    <span class="compare">if (arr[j] < arr[j - 1])</span>
-        swap(j, j - 1);
-    else 
-        break;
-}`,
-  },
-  selectionSort: {
-    ideal: `function selectionSort(arr, n) {
-  for (let i = 0; i < n - 1; i++) {
-    let min = i;
-    for (let j = i + 1; j < n; j++)
-      if (arr[j] < arr[min])
-        min = j;
-    swap(i, min);
-  }
-}`,
-    swap: `function selectionSort(arr, n) {
-  for (let i = 0; i < n - 1; i++) {
-    let min = i;
-    for (let j = i + 1; j < n; j++)
-      if (arr[j] < arr[min])
-        min = j;
-    <span class="swap">swap(i, min)</span>;
-  }
-}`,
-    compare: `function selectionSort(arr, n) {
-  for (let i = 0; i < n - 1; i++) {
-    let min = i;
-    for (let j = i + 1; j < n; j++)
-      <span class = "compare">if (arr[j] < arr[min])</span>
-        min = j;
-    swap(i, min);
-  }
-    }`,
-    select: `function selectionSort(arr, n) {
-  for (let i = 0; i < n - 1; i++) {
-    let min = i;
-    for (let j = i + 1; j < n; j++)
-      if (arr[j] < arr[min])
-        <span class="select">min = j;</span>
-    swap(i, min);
-  }
-}`,
-  },
-  linearSearch: {
-    ideal: `function linearSearch(arr, n, key) {
-  for (let i = 0; i < n; i++)
-    if (arr[i] == key)
-      return i;
-}`,
-    compare: `function linearSearch(arr, n, key) {
-  for (let i = 0; i < n; i++)
-    <span class="compare">if (arr[i] == key)</span>
-      return i;
-}`,
-    select: `function linearSearch(arr, n, key) {
-  for (let i = 0; i < n; i++)
-    if (arr[i] == key)
-      <span class="select">return i;</span>
-}`,
-  },
-  binarySearch: {
-    ideal: `function binarySearch(arr, n, key) {
-  let left = 0;
-  let right = n - 1;
-
-  while (left <= right) {
-    let middle = left + (right - left) / 2;
-
-    if (arr[middle] == key)    
-      return middle;
-    else if (arr[middle] < key)
-      left = middle + 1;
-    else
-      right = middle - 1;
-  }
-}`,
-    compare: `function binarySearch(arr, n, key) {
-  let left = 0;
-  let right = n - 1;
-
-  while (left <= right) {
-    let middle = left + (right - left) / 2;
-
-    if (arr[middle] == key)    
-      return middle;
-    else if (arr[middle] < key)
-      left = middle + 1;
-    else
-      right = middle - 1;
-  }
-}`,
-    select: `function binarySearch(arr, n, key) {
-  let left = 0;
-  let right = n - 1;
-
-  while (left <= right) {
-    let middle = left + (right - left) / 2;
-
-    if (arr[middle] == key)    
-      return middle;
-    else if (arr[middle] < key)
-      left = middle + 1;
-    else
-      right = middle - 1;
-  }
-}`,
-  },
-};
 
 // round rect
 // from: https://stackoverflow.com/questions/1255512/how-to-draw-a-rounded-rectangle-on-html-canvas
@@ -269,9 +78,125 @@ function drawColumn(ctx, x, y, width, height, radius, value, fill, stroke) {
   }
 }
 
+// function swap
+// swap two element of an array
+function swap(arr, i, j) {
+  let t = arr[i];
+  arr[i] = arr[j];
+  arr[j] = t;
+}
+
 function isSorted(arr) {
     for (let i = 1; i < arr.length; i++)
         if (arr[i-1] > arr[i])
             return false;
     return true;
 }
+
+function sort(b) {
+    for (let i = 1; i < b.array.length; i++) {
+        for (let j = i - 1; j >= 0; j--) {
+            if (b.array[i] < b.array[j]) {
+                let t = b.array[i].value;
+                b.array[i].value = b.array[j].value;
+                b.array[j].value = t;
+            }
+        }
+    }
+}
+
+// data
+
+const colors = {
+  ideal: "rgba(51, 0, 255, .6)",
+  swapped: "rgba(255, 0, 51, .6)",
+  compared: "rgba(204, 0, 204, .6)",
+  okay: "rgba(0, 151, 51, .6)",
+  selected: "rgba(51, 0, 255, 1)",
+};
+
+const operations = {
+  swap: "swap",
+  compare: "compare",
+  select: "select",
+};
+
+const description = {
+  linearSearch: `Linear Search:
+  Linear search is a very simple search algorithm.
+  In this type of search, a sequential search is made over all items one by one.
+  Every item is checked and if a match is found then that particular item is returned, otherwise the search continues till the end of the data collection.
+  Complexity: O(n)`,
+    
+  binarySearch: `Binary Search:
+  Binary Search Searches a sorted array by repeatedly dividing the search interval in half.
+  Begin with an interval covering the whole array. If the value of the search key is less than the item in the middle of the interval, narrow the interval to the lower half.
+  Otherwise narrow it to the upper half. Repeatedly check until the value is found or the interval is empty.
+  Complexity: O(log n)`,
+    
+  insertionSort: `Insertion sort:
+  Insertion sort is a simple sorting algorithm that works similar to the way you sort playing cards in your hands.
+  The array is virtually split into a sorted and an unsorted part.
+  Values from the unsorted part are picked and placed at the correct position in the sorted part.
+  Complexity: O(n2)`,
+    
+  selectionSort: `Selection Sort:
+  The selection sort algorithm sorts an array by repeatedly finding the minimum element (considering ascending order) from unsorted part and putting it at the beginning.
+  The algorithm maintains two subarrays in a given array.
+  Complexity: O(n2)`,
+    
+  bubbleSort: `Bubble Sort:
+  Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in wrong order.
+  Complexity: O(n2)`,
+};
+
+const code = {
+  bubbleSort:
+`function bubbleSort() {  
+  for (i = 0; i < n; i++)
+    for (j = 0; j < n - i - 1; j++)
+      if (arr[j] > arr[j + 1])
+        swap(j, j + 1);
+}`,
+    
+  insertionSort:
+`function insertionSort() {  
+    for (i = 1; i < n; i++)
+        for (j = i; j > 0; j--)
+            if (arr[j] < arr[j - 1])
+                swap(j, j - 1);
+            else 
+                break;
+}`,
+    
+  selectionSort:
+`function selectionSort() {
+  for (let i = 0; i < n - 1; i++) {
+    min = i;
+    for (j = i + 1; j < n; j++)
+      if (arr[j] < arr[min])
+        min = j;
+    swap(i, min);
+  }
+}`,
+    
+  linearSearch:
+`function linearSearch(key) {
+  for (i = 0; i < n; i++)
+    if (arr[i] == key)
+      return i;
+}`,
+    
+  binarySearch:
+`function binarySearch(key) {
+    while (left <= right) {
+        if (arr[middle] == key)    
+            return middle;
+        else if (arr[middle] < key)
+            left = middle + 1;
+        else
+            right = middle - 1;
+  }
+}`,
+    
+};
