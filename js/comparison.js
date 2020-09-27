@@ -74,11 +74,17 @@ function stop() {
 
 // handle click events
 
-randbtn.onclick = function() {
+randbtn.onclick = async function() {
   stop();
+  randbtn.disabled = true;
+  startbtn.disabled = true;
+    
   let arr = board1.getRandArray();
   board1.change(arr);
-  board2.change(arr);
+  await board2.change(arr);
+    
+  randbtn.disabled = false;
+  startbtn.disabled = false;
 };
 
 algoMenu1.onchange = function() {

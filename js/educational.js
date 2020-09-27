@@ -104,9 +104,14 @@ async function forward() {
 
 // handle click events
 
-randbtn.onclick = function() {
+randbtn.onclick = async function() {
   stop();
-  board.change(board.getRandArray());
+    
+  randbtn.disabled = true;
+  startbtn.disabled = true;
+  await board.change(board.getRandArray());
+  randbtn.disabled = false;
+  startbtn.disabled = false;
 };
 
 algoMenu.onchange = change;
