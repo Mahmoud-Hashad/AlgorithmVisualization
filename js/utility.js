@@ -1,19 +1,7 @@
 // sleep function
 // stop execution of every thing for (ms) of time
 function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-// function to change animation time
-function changeAnimTime(board) {
-  // select the range element and get its value
-  rangeValue = document.getElementById("animationTime").value;
-
-  // change board animation time
-  board.setTime(rangeValue);
-
-  // timeValue element to match the new value of time
-  document.getElementById("timeValue").innerText = rangeValue;
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // round rect
@@ -87,22 +75,12 @@ function swap(arr, i, j) {
 }
 
 function isSorted(arr) {
-    for (let i = 1; i < arr.length; i++)
-        if (arr[i-1] > arr[i])
-            return false;
-    return true;
-}
-
-function sort(b) {
-    for (let i = 1; i < b.array.length; i++) {
-        for (let j = i - 1; j >= 0; j--) {
-            if (b.array[i] < b.array[j]) {
-                let t = b.array[i].value;
-                b.array[i].value = b.array[j].value;
-                b.array[j].value = t;
-            }
-        }
-    }
+  for (let i = 1; i < arr.length; i++) {
+      if (arr[i - 1] > arr[i]) {
+          return false;
+      }
+  }
+  return true;
 }
 
 // data
@@ -112,13 +90,13 @@ const colors = {
   swapped: "rgba(255, 0, 51, .6)",
   compared: "rgba(204, 0, 204, .6)",
   okay: "rgba(0, 151, 51, .6)",
-  selected: "rgba(51, 0, 255, 1)",
+  selected: "rgba(51, 0, 255, 1)"
 };
 
 const operations = {
   swap: "swap",
   compare: "compare",
-  select: "select",
+  select: "select"
 };
 
 const description = {
@@ -127,40 +105,38 @@ const description = {
   In this type of search, a sequential search is made over all items one by one.
   Every item is checked and if a match is found then that particular item is returned, otherwise the search continues till the end of the data collection.
   Complexity: O(n)`,
-    
+
   binarySearch: `Binary Search:
   Binary Search Searches a sorted array by repeatedly dividing the search interval in half.
   Begin with an interval covering the whole array. If the value of the search key is less than the item in the middle of the interval, narrow the interval to the lower half.
   Otherwise narrow it to the upper half. Repeatedly check until the value is found or the interval is empty.
   Complexity: O(log n)`,
-    
+
   insertionSort: `Insertion sort:
   Insertion sort is a simple sorting algorithm that works similar to the way you sort playing cards in your hands.
   The array is virtually split into a sorted and an unsorted part.
   Values from the unsorted part are picked and placed at the correct position in the sorted part.
   Complexity: O(n2)`,
-    
+
   selectionSort: `Selection Sort:
   The selection sort algorithm sorts an array by repeatedly finding the minimum element (considering ascending order) from unsorted part and putting it at the beginning.
   The algorithm maintains two subarrays in a given array.
   Complexity: O(n2)`,
-    
+
   bubbleSort: `Bubble Sort:
   Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in wrong order.
-  Complexity: O(n2)`,
+  Complexity: O(n2)`
 };
 
 const code = {
-  bubbleSort:
-`function bubbleSort() {  
+  bubbleSort: `function bubbleSort() {  
   for (i = 0; i < n; i++)
     for (j = 0; j < n - i - 1; j++)
       if (arr[j] > arr[j + 1])
         swap(j, j + 1);
 }`,
-    
-  insertionSort:
-`function insertionSort() {  
+
+  insertionSort: `function insertionSort() {  
     for (i = 1; i < n; i++)
         for (j = i; j > 0; j--)
             if (arr[j] < arr[j - 1])
@@ -168,9 +144,8 @@ const code = {
             else 
                 break;
 }`,
-    
-  selectionSort:
-`function selectionSort() {
+
+  selectionSort: `function selectionSort() {
   for (let i = 0; i < n - 1; i++) {
     min = i;
     for (j = i + 1; j < n; j++)
@@ -179,16 +154,14 @@ const code = {
     swap(i, min);
   }
 }`,
-    
-  linearSearch:
-`function linearSearch(key) {
+
+  linearSearch: `function linearSearch(key) {
   for (i = 0; i < n; i++)
     if (arr[i] == key)
       return i;
 }`,
-    
-  binarySearch:
-`function binarySearch(key) {
+
+  binarySearch: `function binarySearch(key) {
     while (left <= right) {
         if (arr[middle] == key)    
             return middle;
@@ -197,6 +170,5 @@ const code = {
         else
             right = middle - 1;
   }
-}`,
-    
+}`
 };

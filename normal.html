@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
-    <!--website Header-->
 
     <!--nav bar-->
     <nav>
@@ -15,7 +14,7 @@
         <h1>Algorithm Visualization</h1>
       </header>
       <div>
-        <a href="./index.html">Normal Mode</a>
+        <a href="./normal.html">Normal Mode</a>
         <a href="./educational.html">Educational Mode</a>
         <a href="./comparison.html">Comparison Mode</a>
         <a href="./about.html">About Us</a>
@@ -27,8 +26,8 @@
       <div class="container controls">
         <!--buttons like randomize the values and change the visualized algorithm-->
         <div class="buttons">
-          <button id="rand" onclick="board.change(board.getRandArray());">Randomize</button>
-          <select name="algorithms" id="algorithms" onchange="change()">
+          <button id="randBtn">Randomize</button>
+          <select name="algorithms" id="algorithms">
             <option disabled selected hidden>Select Algo</option>
             <optgroup label="Searching">
               <option value="linearSearch">Linear Search</option>
@@ -40,8 +39,8 @@
               <option value="selectionSort">Selection Sort</option>
             </optgroup>
           </select>
-          <button id="startbtn" disabled onclick="start()">Start</button>
-          <button onclick="stop()">Stop</button>
+          <button id="startBtn" disabled>Start</button>
+          <button id="stopBtn">Stop</button>
         </div>
           
         <!--controls to change the animation -->
@@ -54,7 +53,6 @@
             max="1"
             step=".1"
             value="0.5"
-            onchange="changeAnimTime(board)"
             id="animationTime"
           />
           <span id="timeValue"> 0.5</span>
@@ -66,23 +64,13 @@
       </div>
         
       <div>
-        <pre id="boardStats"> </pre>
+        <pre id="boardStats"></pre>
       </div>
-    </div>
-      
-    <!--The Footer-->
-    <footer>
-      <p>
-        Created By
-        <a href="https://www.linkedin.com/in/mahmoud-hashad/">Mahmoud Ramadan</a> &
-        <a href="https://www.linkedin.com/in/abdomosa99/">Abdo Mosa</a>
-      </p>
-    </footer>
-      
+    </div>     
       
     <script src="js/utility.js"></script>
     <script src="js/visualization.js"></script>
     <script src="js/algorithms.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/normal.js"></script>
   </body>
 </html>

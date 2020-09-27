@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Algorithm Visualization</title>
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/educational.css" />
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/educational.css"/>
   </head>
+    
   <body>
     <!--website Header-->
 
@@ -16,7 +17,7 @@
         <h1>Algorithm Visualization</h1>
       </header>
       <div>
-        <a href="./index.html">Normal Mode</a>
+        <a href="./normal.html">Normal Mode</a>
         <a href="./educational.html">Educational Mode</a>
         <a href="./comparison.html">Comparison Mode</a>
         <a href="./about.html">About Us</a>
@@ -28,8 +29,8 @@
       <div class="container controls">
         <!--buttons like randomize the values and change the visualized algorithm-->
         <div class="buttons">
-          <button id="rand" onclick="board.change(board.getRandArray());">Randomize</button>
-          <select name="algorithms" id="algorithms" onchange="change()">
+          <button id="randBtn">Randomize</button>
+          <select name="algorithms" id="algorithmsMenu">
             <option disabled selected hidden>Select Algo</option>
             <optgroup label="Searching">
               <option value="linearSearch">Linear Search</option>
@@ -41,41 +42,35 @@
               <option value="selectionSort">Selection Sort</option>
             </optgroup>
           </select>
-          <button id="startbtn" disabled onclick="start()">Start</button>
-          <button onclick="stop()">Stop</button>
+          <button id="startBtn" disabled>Start</button>
+          <button id="stopBtn">Stop</button>
         </div>
       </div>
+        
       <div class="container center inline">
         <div>
-          <div id="controls" style="display: none;">
-            <button id="playpause" onclick="playpause()"><b>&#9654;</b></button>
-            <button id="forword" onclick="forward()"><b>>></b></button>
+          <div id="eduControls">
+            <button id="playPauseBtn"><b>&#9654;</b></button>
+            <button id="forwardBtn"><b>>></b></button>
           </div>
+            
           <canvas id="mainCanvas" width="600px" height="400px"></canvas>
+          
+          <div>
+            <pre id="boardStats"></pre>
+          </div>
         </div>
-        <div id="educational-data">
+        <div id="educationalData">
           <div id="log">
-            <ul id="log-list">
+            <ul id="logList">
                 <li>Algorithm Logs</li>
             </ul>
           </div>
-          <pre id="code">this is the code</pre>
+          <pre id="code">Algorithm Code</pre>
         </div>
       </div>
-      <div>
-        <pre id="boardStats"> </pre>
-      </div>
-      <pre id="desc">Algorithm description</pre>
+      <pre id="desc">Algorithm Description</pre>
     </div>
-      
-    <!--The Footer-->
-    <footer>
-      <p>
-        Created By
-        <a href="https://github.com/Mahmoud-Hashad">Mahmoud Ramadan</a> &
-        <a href="https://github.com/abdomosa1999">Abdo Mosa</a>
-      </p>
-    </footer>
       
     <script src="js/utility.js"></script>
     <script src="js/visualization.js"></script>

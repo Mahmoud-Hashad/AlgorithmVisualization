@@ -17,6 +17,7 @@ body {
 .animationControl {
   margin: 15px;
 }
+
 /* header styles */
 nav header {
   width: 100%;
@@ -46,15 +47,6 @@ nav div a {
 }
 
 /*button styles*/
-.educationalMode {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-}
-
 button,
 input[type="button"],
 select {
@@ -103,37 +95,8 @@ select:hover {
   border: 2px solid rgba(51, 0, 255, 0.6);
 }
 
-/* Footer styles */
-footer {
-  padding: 10px 0;
-  text-align: center;
-  background-color: rgba(51, 0, 255, 0.8);
-  color: #fff;
-}
-footer p {
-  font-size: 18px;
-  color: #fff;
-}
-footer a {
-  color: #fff;
-}
 
-/* About Style */
-.about-section {
-  padding: 60px;
-  text-align: center;
-  background-color: #3333aa;
-  color: white;
-}
-
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 255, 0.2);
-  margin: 2%;
-    width: 46%;
-    text-align: center;
-    float: left
-}
-
-.card img {
-    width: 70%;
+.flex {
+  display: flex;
+  justify-content: space-around;
 }

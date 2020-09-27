@@ -5,9 +5,16 @@
   text-align: center;
 }
 
-#boardStats {
-  margin-left: 15px;
+#eduControls {
+  display: none;
+  justify-content: center;
 }
+
+#boardStats {
+  margin-top: 15px;
+  text-align: center;
+}
+
 .inline {
   display: inline-flex;
   align-content: stretch;
@@ -15,12 +22,12 @@
   padding: 15px;
   width: 100%;
 }
-#educational-data {
+#educationalData {
   padding-left: 20px;
   width: 100%;
 }
-#educational-data div,
-#educational-data pre {
+#educationalData div,
+#educationalData pre {
   height: 49%;
   width: 100%;
   background-color: rgb(175, 175, 175);
@@ -28,12 +35,12 @@
   border-radius: 5px;
 }
 
-#educational-data div {
+#educationalData div {
   margin-bottom: 2%;
 }
 
-#log-list,
-#educational-data pre {
+#logList,
+#educationalData pre {
   overflow: auto;
   max-height: 175px;
   min-height: 175px;

@@ -1,0 +1,70 @@
+/* About Style */
+.about-section {
+  padding: 60px 200px 10px 200px;
+  text-align: center;
+  background-color: #3333aa;
+  font-size: 1.5vw;
+  color: white;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin: 20px;
+    font-size: 3vw;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 500px 500px;
+  grid-gap: 100px;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.card {
+  background-color: #aac;
+  height: 30rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(0, 0, 100, 0.7);
+  font-size: 1.2em;
+}
+
+.card h2 {
+  margin-top: 15px;
+  font-size: 1.5em;
+}
+
+.card img {
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
+  border: 5px solid #272133;
+  margin: 20px;
+  box-shadow: 0 10px 50px rgba(110, 25, 235, 1);
+}
+
+.card a:link, a:visited{
+  text-decoration: none;
+  color: blue;
+}
+
+.card a:hover, .card a:active {
+  text-decoration: underline;
+}
+
+.card button {
+    margin-top: 40px;
+    width: 90%;
+}

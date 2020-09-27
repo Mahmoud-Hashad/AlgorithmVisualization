@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Algorithm Visualization</title>
     <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/comparison.css" />
   </head>
+    
   <body>
     <!--website Header-->
 
@@ -15,8 +15,9 @@
       <header>
         <h1>Algorithm Visualization</h1>
       </header>
+        
       <div>
-        <a href="./index.html">Normal Mode</a>
+        <a href="./normal.html">Normal Mode</a>
         <a href="./educational.html">Educational Mode</a>
         <a href="./comparison.html">Comparison Mode</a>
         <a href="./about.html">About Us</a>
@@ -28,10 +29,11 @@
       <div class="container controls">
         <!--buttons like randomize the values and change the visualized algorithm-->
         <div class="buttons">
-          <button id="rand" onclick="let arr = board1.getRandArray(); board1.change(arr); board2.change(arr);">
+          <button id="randBtn">
             Randomize
           </button>
-          <select name="algorithms" id="algorithms1" onchange="change()">
+            
+          <select name="algorithms" id="algorithms1">
             <option disabled selected hidden>Select Algo1</option>
             <optgroup label="Searching">
               <option value="linearSearch">Linear Search</option>
@@ -43,6 +45,7 @@
               <option value="selectionSort">Selection Sort</option>
             </optgroup>
           </select>
+            
           <select name="algorithms" id="algorithms2">
             <option disabled selected hidden>Select Algo2</option>
             <optgroup label="Searching">
@@ -55,35 +58,27 @@
               <option value="selectionSort">Selection Sort</option>
             </optgroup>
           </select>
-          <button id="startbtn" disabled onclick="start()">Start</button>
-          <button onclick="stop()">Stop</button>
+            
+          <button id="startBtn" disabled>Start</button>
+          <button id="stopBtn">Stop</button>
         </div>
       </div>
       <div class="container center flex">
         <div>
           <canvas id="mainCanvas" width="600px" height="400px"></canvas>
           <div>
-            <pre id="boardStats1"> </pre>
+            <pre id="boardStats1"></pre>
           </div>
         </div>
 
         <div>
           <canvas id="secondCanvas" width="600px" height="400px"></canvas>
           <div>
-            <pre id="boardStats2"> </pre>
+            <pre id="boardStats2"></pre>
           </div>
         </div>
       </div>
     </div>
-      
-    <!--The Footer-->
-    <footer>
-      <p>
-        Created By
-        <a href="https://github.com/Mahmoud-Hashad">Mahmoud Ramadan</a> &
-        <a href="https://github.com/abdomosa1999">Abdo Mosa</a>
-      </p>
-    </footer>
       
     <script src="js/utility.js"></script>
     <script src="js/visualization.js"></script>
